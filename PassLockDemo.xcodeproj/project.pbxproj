@@ -13,6 +13,8 @@
 		B7D5C90E1D8FD5E3003F8C9B /* PassLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D5C90D1D8FD5E3003F8C9B /* PassLockTests.swift */; };
 		B7D5C9121D8FD5E3003F8C9B /* PassLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D5C8FD1D8FD5E2003F8C9B /* PassLock.framework */; };
 		B7D5C9131D8FD5E3003F8C9B /* PassLock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7D5C8FD1D8FD5E2003F8C9B /* PassLock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B7D5C91C1D8FD62A003F8C9B /* PasswordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D5C91B1D8FD62A003F8C9B /* PasswordInputView.swift */; };
+		B7D5C91E1D8FF3D7003F8C9B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D5C91D1D8FF3D7003F8C9B /* Extensions.swift */; };
 		B7E068E01D8FD4F50007A7D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E068DF1D8FD4F50007A7D7 /* AppDelegate.swift */; };
 		B7E068E21D8FD4F50007A7D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E068E11D8FD4F50007A7D7 /* ViewController.swift */; };
 		B7E068E51D8FD4F50007A7D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E068E31D8FD4F50007A7D7 /* Main.storyboard */; };
@@ -81,6 +83,8 @@
 		B7D5C9061D8FD5E3003F8C9B /* PassLockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassLockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D5C90D1D8FD5E3003F8C9B /* PassLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassLockTests.swift; sourceTree = "<group>"; };
 		B7D5C90F1D8FD5E3003F8C9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7D5C91B1D8FD62A003F8C9B /* PasswordInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordInputView.swift; sourceTree = "<group>"; };
+		B7D5C91D1D8FF3D7003F8C9B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B7E068DC1D8FD4F50007A7D7 /* PassLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E068DF1D8FD4F50007A7D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7E068E11D8FD4F50007A7D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 			children = (
 				B7D5C8FF1D8FD5E3003F8C9B /* PassLock.h */,
 				B7D5C9011D8FD5E3003F8C9B /* Info.plist */,
+				B7D5C91B1D8FD62A003F8C9B /* PasswordInputView.swift */,
+				B7D5C91D1D8FF3D7003F8C9B /* Extensions.swift */,
 			);
 			path = PassLock;
 			sourceTree = "<group>";
@@ -413,6 +419,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7D5C91C1D8FD62A003F8C9B /* PasswordInputView.swift in Sources */,
+				B7D5C91E1D8FF3D7003F8C9B /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +510,7 @@
 		B7D5C9151D8FD5E3003F8C9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -513,6 +522,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -521,6 +531,7 @@
 		B7D5C9161D8FD5E3003F8C9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -648,6 +659,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = PassLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemo;
@@ -659,6 +671,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = PassLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemo;
