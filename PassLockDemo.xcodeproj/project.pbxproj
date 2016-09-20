@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B79865061D90D775003FD21A /* PassLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79865051D90D775003FD21A /* PassLockViewController.swift */; };
+		B79865081D90D96E003FD21A /* PassLock.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B79865071D90D96E003FD21A /* PassLock.storyboard */; };
 		B7D5C8F71D8FD548003F8C9B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D5C8F51D8FD548003F8C9B /* Launch Screen.storyboard */; };
 		B7D5C9001D8FD5E3003F8C9B /* PassLock.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D5C8FF1D8FD5E3003F8C9B /* PassLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7D5C9071D8FD5E3003F8C9B /* PassLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D5C8FD1D8FD5E2003F8C9B /* PassLock.framework */; };
@@ -76,6 +78,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B79865051D90D775003FD21A /* PassLockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassLockViewController.swift; sourceTree = "<group>"; };
+		B79865071D90D96E003FD21A /* PassLock.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PassLock.storyboard; sourceTree = "<group>"; };
 		B7D5C8F61D8FD548003F8C9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		B7D5C8FD1D8FD5E2003F8C9B /* PassLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D5C8FF1D8FD5E3003F8C9B /* PassLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassLock.h; sourceTree = "<group>"; };
@@ -145,8 +149,10 @@
 			children = (
 				B7D5C8FF1D8FD5E3003F8C9B /* PassLock.h */,
 				B7D5C9011D8FD5E3003F8C9B /* Info.plist */,
-				B7D5C91B1D8FD62A003F8C9B /* PasswordInputView.swift */,
 				B7D5C91D1D8FF3D7003F8C9B /* Extensions.swift */,
+				B7D5C91B1D8FD62A003F8C9B /* PasswordInputView.swift */,
+				B79865051D90D775003FD21A /* PassLockViewController.swift */,
+				B79865071D90D96E003FD21A /* PassLock.storyboard */,
 			);
 			path = PassLock;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B79865081D90D96E003FD21A /* PassLock.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +428,7 @@
 			files = (
 				B7D5C91C1D8FD62A003F8C9B /* PasswordInputView.swift in Sources */,
 				B7D5C91E1D8FF3D7003F8C9B /* Extensions.swift in Sources */,
+				B79865061D90D775003FD21A /* PassLockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +745,7 @@
 				B7D5C9161D8FD5E3003F8C9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B7D5C9181D8FD5E3003F8C9B /* Build configuration list for PBXNativeTarget "PassLockTests" */ = {
 			isa = XCConfigurationList;
@@ -745,6 +754,7 @@
 				B7D5C91A1D8FD5E3003F8C9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B7E068D71D8FD4F50007A7D7 /* Build configuration list for PBXProject "PassLockDemo" */ = {
 			isa = XCConfigurationList;
