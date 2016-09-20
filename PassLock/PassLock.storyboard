@@ -3,12 +3,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Pass Lock View Controller-->
         <scene sceneID="82N-tf-K11">
             <objects>
-                <viewController id="L7T-gm-AjI" customClass="PassLockViewController" customModule="PassLock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PassLockViewController" id="L7T-gm-AjI" customClass="PassLockViewController" customModule="PassLock" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pg4-x1-GGV"/>
                         <viewControllerLayoutGuide type="bottom" id="nuX-z1-FJ8"/>
@@ -16,8 +18,66 @@
                     <view key="view" contentMode="scaleToFill" id="QYY-3w-N05">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQT-2y-TpO">
+                                <rect key="frame" x="20" y="156" width="560" height="108"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="输入密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKN-q3-MW7">
+                                        <rect key="frame" x="252" y="0.0" width="56" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码输入错误, 您还有 4 次尝试机会" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsa-3j-bgA">
+                                        <rect key="frame" x="186" y="93" width="189" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                        <color key="textColor" red="0.81568627450980391" green="0.0078431372549019607" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1W-4l-u77" customClass="PasswordInputView" customModule="PassLock" customModuleProvider="target">
+                                        <rect key="frame" x="220" y="17" width="120" height="76"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="246-Uy-nMF"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="spacing">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="strokeHeight">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="digit">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="AKN-q3-MW7" firstAttribute="centerX" secondItem="sQT-2y-TpO" secondAttribute="centerX" id="0NJ-gd-7g7"/>
+                                    <constraint firstItem="hsa-3j-bgA" firstAttribute="top" secondItem="Z1W-4l-u77" secondAttribute="bottom" id="5al-fv-5XF"/>
+                                    <constraint firstItem="hsa-3j-bgA" firstAttribute="centerX" secondItem="sQT-2y-TpO" secondAttribute="centerX" id="Jvm-md-71P"/>
+                                    <constraint firstAttribute="bottom" secondItem="hsa-3j-bgA" secondAttribute="bottom" id="V3w-fV-jNV"/>
+                                    <constraint firstItem="AKN-q3-MW7" firstAttribute="top" secondItem="sQT-2y-TpO" secondAttribute="top" id="XnF-I8-GNL"/>
+                                    <constraint firstItem="Z1W-4l-u77" firstAttribute="centerX" secondItem="sQT-2y-TpO" secondAttribute="centerX" id="bfE-N1-UzJ"/>
+                                    <constraint firstAttribute="height" constant="108" id="cLH-FY-nYh"/>
+                                    <constraint firstItem="Z1W-4l-u77" firstAttribute="top" secondItem="AKN-q3-MW7" secondAttribute="bottom" id="tvF-XM-oMQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="sQT-2y-TpO" secondAttribute="trailing" id="42w-Yd-fzU"/>
+                            <constraint firstItem="sQT-2y-TpO" firstAttribute="centerY" secondItem="QYY-3w-N05" secondAttribute="centerY" multiplier="0.7" id="8We-23-rbm"/>
+                            <constraint firstItem="sQT-2y-TpO" firstAttribute="leading" secondItem="QYY-3w-N05" secondAttribute="leadingMargin" id="jty-3t-Al5"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="hsa-3j-bgA" id="pSY-4l-wGS"/>
+                        <outlet property="passwordInputView" destination="Z1W-4l-u77" id="Y7K-8q-LUh"/>
+                        <outlet property="titleLabel" destination="AKN-q3-MW7" id="HLX-Tg-nCA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hmh-cK-hYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
