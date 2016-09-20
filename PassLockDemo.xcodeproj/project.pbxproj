@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B70B95031D90F2D10081811D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70B95021D90F2D10081811D /* Configuration.swift */; };
+		B711BE681D912E31001ACEFC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711BE671D912E31001ACEFC /* StateMachine.swift */; };
 		B79865061D90D775003FD21A /* PassLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79865051D90D775003FD21A /* PassLockViewController.swift */; };
 		B79865081D90D96E003FD21A /* PassLock.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B79865071D90D96E003FD21A /* PassLock.storyboard */; };
 		B7D5C8F71D8FD548003F8C9B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7D5C8F51D8FD548003F8C9B /* Launch Screen.storyboard */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		B70B95021D90F2D10081811D /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		B711BE671D912E31001ACEFC /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		B79865051D90D775003FD21A /* PassLockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassLockViewController.swift; sourceTree = "<group>"; };
 		B79865071D90D96E003FD21A /* PassLock.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PassLock.storyboard; sourceTree = "<group>"; };
 		B7D5C8F61D8FD548003F8C9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				B70B95021D90F2D10081811D /* Configuration.swift */,
 				B7D5C91B1D8FD62A003F8C9B /* PasswordInputView.swift */,
 				B79865051D90D775003FD21A /* PassLockViewController.swift */,
+				B711BE671D912E31001ACEFC /* StateMachine.swift */,
 				B79865071D90D96E003FD21A /* PassLock.storyboard */,
 			);
 			path = PassLock;
@@ -429,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B711BE681D912E31001ACEFC /* StateMachine.swift in Sources */,
 				B7D5C91C1D8FD62A003F8C9B /* PasswordInputView.swift in Sources */,
 				B70B95031D90F2D10081811D /* Configuration.swift in Sources */,
 				B7D5C91E1D8FF3D7003F8C9B /* Extensions.swift in Sources */,
