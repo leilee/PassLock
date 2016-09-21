@@ -10,11 +10,13 @@ import UIKit
 
 public protocol PassLockProtocol: class {
   func passLockController(passLockController: PassLockViewController, setPassLockSucceed password: Password)
+  func passLockController(passLockController: PassLockViewController, removePassLock succeed: Bool)
 }
 
 // make protocol functions optional
 public extension PassLockProtocol {
   func passLockController(passLockController: PassLockViewController, setPassLockSucceed password: Password) {}
+  func passLockController(passLockController: PassLockViewController, removePassLock succeed: Bool) {}
 }
 
 public class PassLockViewController: UIViewController {
@@ -61,7 +63,7 @@ public class PassLockViewController: UIViewController {
 extension PassLockViewController: PasswordInputProtocol {
 
   public func passwordInputView(passwordInputView: PasswordInputView, inputComplete input: Password) {
-    let event: PassLockEvent = stateMachine.state.validate(currentPassword, y: input) ? .Valid : .Invalid
+    let event = config.passLockType.nextEvent(x: currentPassword, y: input, with: stateMachine.state)
     stateMachine.handleEvent(event, info: input)
   }
 
