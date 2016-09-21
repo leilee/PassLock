@@ -8,7 +8,13 @@
 
 import UIKit
 
+public protocol PasswordInputProtocol: class {
+  func passwordInputComplete(passwordInputView: PasswordInputView, input: String)
+}
+
 public class PasswordInputView: UIView {
+
+  public weak var delegate: PasswordInputProtocol?
 
   public var keyboardType: UIKeyboardType = .NumberPad
 
@@ -26,6 +32,9 @@ public class PasswordInputView: UIView {
       for j in store.length..<digit {
         strokeViews[j].hidden = false
         dotViews[j].hidden = true
+      }
+      if store.length == digit {
+        delegate?.passwordInputComplete(self, input: store)
       }
     }
   }
@@ -74,6 +83,16 @@ extension PasswordInputView: UIKeyInput {
 
   override public func canBecomeFirstResponder() -> Bool {
     return true
+  }
+
+}
+
+// MARK: - Public
+
+extension PasswordInputView {
+
+  public func clear() {
+    store = ""
   }
 
 }
