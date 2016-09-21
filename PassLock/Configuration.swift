@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias Password = String
+
 public enum PassLockType {
   case SetPassword
   case ChangePassword
@@ -19,7 +21,7 @@ public struct PasswordConfiguration {
   let spacing: CGFloat
   let strokeHeight: CGFloat
   let strokeColor: UIColor
-  
+
   init(digit: Int = 4, spacing: CGFloat = 20, strokeHeight: CGFloat = 2, strokeColor: UIColor = UIColor.blackColor()) {
     self.digit = digit
     self.spacing = spacing
@@ -29,7 +31,18 @@ public struct PasswordConfiguration {
 }
 
 public struct PassLockConfiguration {
-  let passwordConfig = PasswordConfiguration()
-  let retryCount = 5
-  let passLockType = PassLockType.SetPassword
+  let passwordConfig: PasswordConfiguration
+  let retryCount: Int
+  let passLockType: PassLockType
+  let initialPassword: Password?
+
+  init(passwordConfig: PasswordConfiguration = PasswordConfiguration(),
+       retryCount: Int = 5,
+       passLockType: PassLockType = .SetPassword,
+       initialPassword: Password? = nil) {
+    self.passwordConfig = passwordConfig
+    self.retryCount = retryCount
+    self.passLockType = passLockType
+    self.initialPassword = initialPassword
+  }
 }
