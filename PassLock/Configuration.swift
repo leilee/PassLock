@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Password = String
+public typealias Password = String
 
 public enum PassLockType {
   case SetPassword
@@ -36,7 +36,7 @@ public struct PassLockConfiguration {
   let passLockType: PassLockType
   let initialPassword: Password?
 
-  init(passwordConfig: PasswordConfiguration = PasswordConfiguration(),
+  public init(passwordConfig: PasswordConfiguration = PasswordConfiguration(),
        retryCount: Int = 5,
        passLockType: PassLockType = .SetPassword,
        initialPassword: Password? = nil) {

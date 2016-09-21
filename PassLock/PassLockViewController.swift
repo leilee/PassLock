@@ -9,12 +9,12 @@
 import UIKit
 
 public protocol PassLockProtocol: class {
-  func setPassLockSuccess()
+  func passLockController(passLockController: PassLockViewController, setPassLockSucceed password: Password)
 }
 
-extension PassLockProtocol {
-  // make functions optional
-  func setPassLockSuccess() {}
+// make protocol functions optional
+public extension PassLockProtocol {
+  func passLockController(passLockController: PassLockViewController, setPassLockSucceed password: Password) {}
 }
 
 public class PassLockViewController: UIViewController {
@@ -29,7 +29,7 @@ public class PassLockViewController: UIViewController {
   var currentPassword: Password?
   var retryCount = 0
 
-  lazy var stateMachine: StateMachine<PassLockState, PassLockEvent, Any> = {
+  lazy var stateMachine: StateMachine<PassLockState, PassLockEvent, Password> = {
     switch self.config.passLockType {
     case .SetPassword: return self.setPasswordStateMachine()
     case .ChangePassword: return self.changePasswordStateMachine()
@@ -51,7 +51,7 @@ public class PassLockViewController: UIViewController {
     // setup UI
     passwordInputView.delegate = self
     passwordInputView.becomeFirstResponder()
-    
+
     titleLabel.text = "请输入密码"
     descriptionLabel.hidden = true
   }
@@ -60,7 +60,7 @@ public class PassLockViewController: UIViewController {
 
 extension PassLockViewController: PasswordInputProtocol {
 
-  public func passwordInputComplete(passwordInputView: PasswordInputView, input: String) {
+  public func passwordInputView(passwordInputView: PasswordInputView, inputComplete input: Password) {
     let event: PassLockEvent = stateMachine.state.validate(currentPassword, y: input) ? .Valid : .Invalid
     stateMachine.handleEvent(event, info: input)
   }

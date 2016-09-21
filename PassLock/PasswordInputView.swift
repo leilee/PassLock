@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol PasswordInputProtocol: class {
-  func passwordInputComplete(passwordInputView: PasswordInputView, input: String)
+  func passwordInputView(passwordInputView: PasswordInputView, inputComplete input: Password)
 }
 
 public class PasswordInputView: UIView {
@@ -34,7 +34,7 @@ public class PasswordInputView: UIView {
         dotViews[j].hidden = true
       }
       if store.length == digit {
-        delegate?.passwordInputComplete(self, input: store)
+        delegate?.passwordInputView(self, inputComplete: store)
       }
     }
   }

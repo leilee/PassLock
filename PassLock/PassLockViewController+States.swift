@@ -28,19 +28,22 @@ enum PassLockEvent {
 
 extension PassLockViewController {
 
-  func setPasswordStateMachine() -> StateMachine<PassLockState, PassLockEvent, Any> {
-    return StateMachine<PassLockState, PassLockEvent, Any>(initialState: .Input) { (state, event) in
+  func setPasswordStateMachine() -> StateMachine<PassLockState, PassLockEvent, Password> {
+    return StateMachine<PassLockState, PassLockEvent, Password>(initialState: .Input) { (state, event) in
       switch (state, event) {
       case (.Input, .Valid): return (.Confirm, { [weak self] _, _, info in
         // input => confirm
         self?.titleLabel.text = "验证密码"
         self?.passwordInputView.clear()
-        self?.currentPassword = info as? String
+        self?.currentPassword = info
       })
       case (.Confirm, .Valid): return (.Done, {[weak self] _, _, _ in
         // confirm => done
-        self?.descriptionLabel.hidden = true
-        self?.delegate?.setPassLockSuccess()
+        guard let strongSelf = self, let password = self?.currentPassword else {
+          return
+        }
+        strongSelf.descriptionLabel.hidden = true
+        strongSelf.delegate?.passLockController(strongSelf, setPassLockSucceed: password)
       })
       case (.Confirm, .Invalid): return (.Confirm, {[weak self] _, _, _ in
         // reconfirm
@@ -53,16 +56,16 @@ extension PassLockViewController {
     }
   }
 
-  func changePasswordStateMachine() -> StateMachine<PassLockState, PassLockEvent, Any> {
-    return StateMachine<PassLockState, PassLockEvent, Any>(initialState: .Input) { (state, event) in
+  func changePasswordStateMachine() -> StateMachine<PassLockState, PassLockEvent, Password> {
+    return StateMachine<PassLockState, PassLockEvent, Password>(initialState: .Input) { (state, event) in
       switch (state, event) {
       default: return nil
       }
     }
   }
 
-  func removePasswordStateMachine() -> StateMachine<PassLockState, PassLockEvent, Any> {
-    return StateMachine<PassLockState, PassLockEvent, Any>(initialState: .Input) { (state, event) in
+  func removePasswordStateMachine() -> StateMachine<PassLockState, PassLockEvent, Password> {
+    return StateMachine<PassLockState, PassLockEvent, Password>(initialState: .Input) { (state, event) in
       switch (state, event) {
       default: return nil
       }
