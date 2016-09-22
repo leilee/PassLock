@@ -32,7 +32,13 @@ class TableViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    switch indexPath.row {
+    switch (indexPath.section, indexPath.row) {
+    case (0, 1):
+      let password = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaults.passwordKey) as? String
+      let config = PassLockConfiguration(passLockType: .ChangePassword, initialPassword: password)
+      let controller = PassLockViewController.instantiateViewController(configration: config)
+      controller.delegate = self
+      navigationController?.pushViewController(controller, animated: true)
     default:
       break
     }
@@ -53,6 +59,21 @@ extension TableViewController: PassLockProtocol {
       navigationController?.popViewControllerAnimated(true)
     case .Failure:
       break
+    }
+  }
+  
+  func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {
+    switch result {
+    case .Success(let password):
+      print("change pass lock success: \(password)")
+      NSUserDefaults.standardUserDefaults().setObject(password, forKey: UserDefaults.passwordKey)
+      navigationController?.popViewControllerAnimated(true)
+    case .Failure:
+      print("change pass lock failure")
+      let alert = UIAlertController(title: "Go Die", message: "Change Password Failure", preferredStyle: .Alert)
+      alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+      navigationController?.popViewControllerAnimated(true)
+      presentViewController(alert, animated: true, completion: nil)
     }
   }
   
@@ -80,6 +101,7 @@ extension TableViewController {
   
   @IBAction func enablePasswordValueChanged(sender: AnyObject) {
     let type: PassLockType = (sender as! UISwitch).on ? .SetPassword : .RemovePassword
+    (sender as! UISwitch).on = !(sender as! UISwitch).on
     let password = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaults.passwordKey) as? String
     let config = PassLockConfiguration(passLockType: type, initialPassword: password)
     let controller = PassLockViewController.instantiateViewController(configration: config)
