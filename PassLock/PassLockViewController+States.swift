@@ -48,9 +48,11 @@ extension PassLockViewController {
       })
       case (.Confirm, .Invalid): return (.Confirm, { _, _, _ in
         // reconfirm
-        self?.passwordInputView.clear()
-        self?.descriptionLabel.text = "密码不匹配, 请再试一次"
-        self?.descriptionLabel.hidden = false
+        self?.passwordInputView.shake({ 
+          self?.passwordInputView.clear()
+          self?.descriptionLabel.text = "密码不匹配, 请再试一次"
+          self?.descriptionLabel.hidden = false
+        })
       })
       default: return nil
       }
@@ -69,6 +71,7 @@ extension PassLockViewController {
     return StateMachine<PassLockState, PassLockEvent, Password>(initialState: .Input) { [weak self] (state, event) in
       switch (state, event) {
       case (.Input, .Valid): return (.Done, {  _, _, _ in
+        // input => done
         guard let strongSelf = self else {
           return
         }
@@ -81,15 +84,19 @@ extension PassLockViewController {
         }
         strongSelf.retryCount += 1
         if strongSelf.retryCount >= strongSelf.config.retryCount {
+          // failure
           return (.Done, { _, _, _ in
             strongSelf.descriptionLabel.hidden = true
             strongSelf.delegate?.passLockController(strongSelf, removePassLock: false)
           })
         } else {
+          // retry
           return (.Input, { _, _, _ in
-            strongSelf.passwordInputView.clear()
-            strongSelf.descriptionLabel.hidden = false
-            strongSelf.descriptionLabel.text = "密码不匹配, 您还有\(strongSelf.config.retryCount - strongSelf.retryCount)次尝试机会"
+            strongSelf.passwordInputView.shake({ 
+              strongSelf.passwordInputView.clear()
+              strongSelf.descriptionLabel.hidden = false
+              strongSelf.descriptionLabel.text = "密码不匹配, 您还有\(strongSelf.config.retryCount - strongSelf.retryCount)次尝试机会"
+            })
           })
         }
       default: return nil
