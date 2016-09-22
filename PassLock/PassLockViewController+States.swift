@@ -44,7 +44,7 @@ extension PassLockViewController {
           return
         }
         strongSelf.descriptionLabel.hidden = true
-        strongSelf.delegate?.passLockController(strongSelf, setPassLockSucceed: password)
+        strongSelf.delegate?.passLockController(strongSelf, didSetPassLock: .Success(password))
       })
       case (.Confirm, .Invalid): return (.Confirm, { _, _, _ in
         // reconfirm
@@ -76,7 +76,7 @@ extension PassLockViewController {
           return
         }
         strongSelf.descriptionLabel.hidden = true
-        strongSelf.delegate?.passLockController(strongSelf, removePassLock: true)
+        strongSelf.delegate?.passLockController(strongSelf, didRemovePassLock: .Success(nil))
       })
       case (.Confirm, .Invalid):
         guard let strongSelf = self else {
@@ -87,7 +87,7 @@ extension PassLockViewController {
           // exceed retry count, failure
           return (.Done, { _, _, _ in
             strongSelf.descriptionLabel.hidden = true
-            strongSelf.delegate?.passLockController(strongSelf, removePassLock: false)
+            strongSelf.delegate?.passLockController(strongSelf, didRemovePassLock: .Failure)
           })
         } else {
           // retry

@@ -8,15 +8,20 @@
 
 import UIKit
 
+public enum Result<T> {
+  case Success(T)
+  case Failure
+}
+
 public protocol PassLockProtocol: class {
-  func passLockController(passLockController: PassLockViewController, setPassLockSucceed password: Password)
-  func passLockController(passLockController: PassLockViewController, removePassLock succeed: Bool)
+  func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>)
+  func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>)
 }
 
 // make protocol functions optional
 public extension PassLockProtocol {
-  func passLockController(passLockController: PassLockViewController, setPassLockSucceed password: Password) {}
-  func passLockController(passLockController: PassLockViewController, removePassLock succeed: Bool) {}
+  func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {}
+  func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>) {}
 }
 
 public class PassLockViewController: UIViewController {
