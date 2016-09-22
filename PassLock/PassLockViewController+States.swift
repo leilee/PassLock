@@ -48,10 +48,10 @@ extension PassLockViewController {
       })
       case (.Confirm, .Invalid): return (.Confirm, { _, _, _ in
         // confirm again
+        self?.descriptionLabel.text = "密码不匹配, 请再试一次"
+        self?.descriptionLabel.hidden = false
         self?.passwordInputView.shake() {
           self?.passwordInputView.clear()
-          self?.descriptionLabel.text = "密码不匹配, 请再试一次"
-          self?.descriptionLabel.hidden = false
         }
       })
       default: return nil
@@ -81,10 +81,10 @@ extension PassLockViewController {
         } else {
           // retry
           return (.Confirm, { _, _, _ in
+            strongSelf.descriptionLabel.text = "密码不匹配, 您还有 \(strongSelf.config.retryCount - strongSelf.retryCount) 次尝试机会"
+            strongSelf.descriptionLabel.hidden = false
             strongSelf.passwordInputView.shake() {
               strongSelf.passwordInputView.clear()
-              strongSelf.descriptionLabel.hidden = false
-              strongSelf.descriptionLabel.text = "密码不匹配, 您还有 \(strongSelf.config.retryCount - strongSelf.retryCount) 次尝试机会"
             }
           })
         }
@@ -104,10 +104,10 @@ extension PassLockViewController {
       })
       case (.Reconfirm, .Invalid): return (.Reconfirm, { _, _, _ in
         // reconfirm again
+        self?.descriptionLabel.text = "密码不匹配, 请再试一次"
+        self?.descriptionLabel.hidden = false
         self?.passwordInputView.shake() {
           self?.passwordInputView.clear()
-          self?.descriptionLabel.text = "密码不匹配, 请再试一次"
-          self?.descriptionLabel.hidden = false
         }
       })
       default: return nil
@@ -140,10 +140,10 @@ extension PassLockViewController {
         } else {
           // retry
           return (.Confirm, { _, _, _ in
+            strongSelf.descriptionLabel.text = "密码不匹配, 您还有 \(strongSelf.config.retryCount - strongSelf.retryCount) 次尝试机会"
+            strongSelf.descriptionLabel.hidden = false
             strongSelf.passwordInputView.shake() {
               strongSelf.passwordInputView.clear()
-              strongSelf.descriptionLabel.hidden = false
-              strongSelf.descriptionLabel.text = "密码不匹配, 您还有 \(strongSelf.config.retryCount - strongSelf.retryCount) 次尝试机会"
             }
           })
         }
