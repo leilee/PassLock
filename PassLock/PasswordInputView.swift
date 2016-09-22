@@ -35,7 +35,7 @@ public class PasswordInputView: UIView {
       }
       if store.length == digit {
         // 输入密码后, delay 0.1s 再回调 delegate
-        // 否则最后一个 dot 的变化来不及刷新
+        // 否则最后一位密码的 UI 来不及刷新
         delay(0.1) {
           self.delegate?.passwordInputView(self, inputComplete: self.store)
         }

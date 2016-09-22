@@ -6,8 +6,8 @@
 //  Copyright © 2016 NSCodeMonkey. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Foundation
 
 // MARK: - String
 
