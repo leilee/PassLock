@@ -288,10 +288,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7E069041D8FD4F60007A7D7 /* Build configuration list for PBXNativeTarget "PassLockDemo" */;
 			buildPhases = (
+				B733F3CD1D93AAC6009C12F2 /* Change BundleVersion To Git Commit Count */,
 				B7E068D81D8FD4F50007A7D7 /* Sources */,
 				B7E068D91D8FD4F50007A7D7 /* Frameworks */,
 				B7E068DA1D8FD4F50007A7D7 /* Resources */,
 				B7D5C9171D8FD5E3003F8C9B /* Embed Frameworks */,
+				B733F3CE1D93AB02009C12F2 /* Change BundleVersion To 'auto' */,
 			);
 			buildRules = (
 			);
@@ -432,6 +434,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B733F3CD1D93AAC6009C12F2 /* Change BundleVersion To Git Commit Count */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Change BundleVersion To Git Commit Count";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Pre-Build\nGIT=/usr/bin/git\n\nBUILD_SUFIX=\"\"\n\nif [ $CONFIGURATION == Debug ] || [ $CONFIGURATION == Adhoc ]\nthen\nBUILD_SUFIX=\"D\"\nfi\n\nbuildNumber=\"`$GIT rev-list HEAD --count`$BUILD_SUFIX\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		B733F3CE1D93AB02009C12F2 /* Change BundleVersion To 'auto' */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Change BundleVersion To 'auto'";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=\"auto\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B7D5C8F81D8FD5E2003F8C9B /* Sources */ = {
