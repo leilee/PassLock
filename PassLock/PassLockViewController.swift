@@ -15,12 +15,14 @@ public enum Result<T> {
 
 public protocol PassLockProtocol: class {
   func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>)
+  func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>)
   func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>)
 }
 
 // make protocol functions optional
 public extension PassLockProtocol {
   func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {}
+  func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {}
   func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>) {}
 }
 
