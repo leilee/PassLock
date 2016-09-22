@@ -44,18 +44,27 @@ class TableViewController: UITableViewController {
 
 extension TableViewController: PassLockProtocol {
   
-  func passLockController(passLockController: PassLockViewController, setPassLockSucceed password: Password) {
-    NSUserDefaults.standardUserDefaults().setObject(password, forKey: UserDefaults.passwordKey)
-    enablePasswordSwitch.on = UserDefaults.hasPassword()
-    navigationController?.popViewControllerAnimated(true)
+  func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {
+    switch result {
+    case .Success(let password):
+      print("set pass lock success: \(password)")
+      NSUserDefaults.standardUserDefaults().setObject(password, forKey: UserDefaults.passwordKey)
+      enablePasswordSwitch.on = UserDefaults.hasPassword()
+      navigationController?.popViewControllerAnimated(true)
+    case .Failure:
+      break
+    }
   }
   
-  func passLockController(passLockController: PassLockViewController, removePassLock succeed: Bool) {
-    if succeed {
+  func passLockController(passLockController: PassLockViewController, didRemovePassLock result: Result<Any?>) {
+    switch result {
+    case .Success(_):
+      print("remove pass lock success")
       NSUserDefaults.standardUserDefaults().setObject(nil, forKey: UserDefaults.passwordKey)
       enablePasswordSwitch.on = UserDefaults.hasPassword()
       navigationController?.popViewControllerAnimated(true)
-    } else {
+    case .Failure:
+      print("remove pass lock failure")
       let alert = UIAlertController(title: "Go Die", message: "Remove Password Failure", preferredStyle: .Alert)
       alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
       navigationController?.popViewControllerAnimated(true)
