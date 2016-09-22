@@ -16,10 +16,10 @@ enum PassLockEvent {
   case Valid, Invalid
 }
 
-extension PassLockType {
-  func nextEvent(x x: Password?, y: Password?, with state: PassLockState) -> PassLockEvent {
-    switch (self, state) {
-    case (.SetPassword, .Confirm), (.RemovePassword, .Confirm):
+extension PassLockState {
+  func nextEvent(x x: Password?, y: Password?) -> PassLockEvent {
+    switch self {
+    case .Confirm, .Reconfirm:
       return x == y ? .Valid : .Invalid
     default:
       return .Valid
@@ -64,6 +64,7 @@ extension PassLockViewController {
       switch (state, event) {
       case (.Confirm, .Valid): return (.Input, { _, _, _ in
         // confirm => input
+        self?.passwordInputView.clear()
         self?.titleLabel.text = "请输入新密码"
         self?.descriptionLabel.hidden = true
       })

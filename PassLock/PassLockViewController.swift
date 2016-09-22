@@ -70,7 +70,7 @@ public class PassLockViewController: UIViewController {
 extension PassLockViewController: PasswordInputProtocol {
 
   public func passwordInputView(passwordInputView: PasswordInputView, inputComplete input: Password) {
-    let event = config.passLockType.nextEvent(x: currentPassword, y: input, with: stateMachine.state)
+    let event = stateMachine.state.nextEvent(x: currentPassword, y: input)
     stateMachine.handleEvent(event, info: input)
   }
 
