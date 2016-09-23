@@ -16,6 +16,15 @@ public enum PassLockType {
   case RemovePassword
 }
 
+extension PassLockType {
+  public var title: String {
+    switch self {
+    case .SetPassword: return "请输入密码"
+    case .ChangePassword, .RemovePassword: return "请输入旧密码"
+    }
+  }
+}
+
 public struct PasswordConfiguration {
   let digit: Int
   let spacing: CGFloat

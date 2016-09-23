@@ -61,7 +61,7 @@ public class PassLockViewController: UIViewController {
     passwordInputView.delegate = self
     passwordInputView.becomeFirstResponder()
 
-    titleLabel.text = "请输入密码"
+    titleLabel.text = config.passLockType.title
     descriptionLabel.hidden = true
   }
 
