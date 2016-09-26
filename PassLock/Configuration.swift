@@ -26,7 +26,7 @@ extension PassLockType {
   }
 }
 
-public struct PasswordConfiguration {
+public struct PasswordViewConfiguration {
   let digit: Int
   let spacing: CGFloat
   let strokeHeight: CGFloat
@@ -41,13 +41,13 @@ public struct PasswordConfiguration {
 }
 
 public struct PassLockConfiguration {
-  let passwordConfig: PasswordConfiguration
+  let passwordConfig: PasswordViewConfiguration
   let retryCount: Int
   let usingTouchID: Bool
   let passLockType: PassLockType
   let initialPassword: Password?
 
-  public init(passwordConfig: PasswordConfiguration = PasswordConfiguration(),
+  public init(passwordConfig: PasswordViewConfiguration = PasswordViewConfiguration(),
        retryCount: Int = 5,
        usingTouchID: Bool = false,
        passLockType: PassLockType = .SetPassword,
