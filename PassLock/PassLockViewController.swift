@@ -17,6 +17,7 @@ public protocol PassLockProtocol: class {
   func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>)
   func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>)
   func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>)
+  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<Any?>)
 }
 
 // make protocol functions optional
@@ -24,6 +25,7 @@ public extension PassLockProtocol {
   func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {}
   func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {}
   func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>) {}
+  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<Any?>) {}
 }
 
 public class PassLockViewController: UIViewController {
@@ -43,6 +45,7 @@ public class PassLockViewController: UIViewController {
     case .SetPassword: return self.setPasswordStateMachine()
     case .ChangePassword: return self.changePasswordStateMachine()
     case .RemovePassword: return self.removePasswordStateMachine()
+    case .Unlock: return self.unlockStateMachine()
     }
   }()
 

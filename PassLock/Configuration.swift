@@ -14,12 +14,13 @@ public enum PassLockType {
   case SetPassword
   case ChangePassword
   case RemovePassword
+  case Unlock
 }
 
 extension PassLockType {
   public var title: String {
     switch self {
-    case .SetPassword: return "请输入密码"
+    case .SetPassword, .Unlock: return "请输入密码"
     case .ChangePassword, .RemovePassword: return "请输入旧密码"
     }
   }

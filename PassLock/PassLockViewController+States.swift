@@ -152,5 +152,42 @@ extension PassLockViewController {
       }
     }
   }
+  
+  func unlockStateMachine() -> StateMachine<PassLockState, PassLockEvent, Password> {
+    return StateMachine<PassLockState, PassLockEvent, Password>(initialState: .Confirm) { [weak self] state, event in
+      switch (state, event) {
+      case (.Confirm, .Valid): return (.Done, {  _, _, _ in
+        // confirm => unlock
+        guard let strongSelf = self else {
+          return
+        }
+        strongSelf.descriptionLabel.hidden = true
+        strongSelf.delegate?.passLockController(strongSelf, didUnlock: .Success(nil))
+      })
+      case (.Confirm, .Invalid):
+        guard let strongSelf = self else {
+          return nil
+        }
+        strongSelf.retryCount += 1
+        if strongSelf.retryCount >= strongSelf.config.retryCount {
+          // exceed retry count, failure
+          return (.Done, { _, _, _ in
+            strongSelf.descriptionLabel.hidden = true
+            strongSelf.delegate?.passLockController(strongSelf, didUnlock: .Failure)
+          })
+        } else {
+          // retry
+          return (.Confirm, { _, _, _ in
+            strongSelf.descriptionLabel.text = "密码不匹配, 您还有 \(strongSelf.config.retryCount - strongSelf.retryCount) 次尝试机会"
+            strongSelf.descriptionLabel.hidden = false
+            strongSelf.passwordInputView.shake() {
+              strongSelf.passwordInputView.clear()
+            }
+          })
+        }
+      default: return nil
+      }
+    }
+  }
 
 }
