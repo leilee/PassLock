@@ -10,9 +10,18 @@ import UIKit
 import PassLock
 
 struct UserDefaults {
-  static let passwordKey = "com.nscodemonkey.passlockdemo.password"
-  static func hasPassword() -> Bool {
-    return NSUserDefaults.standardUserDefaults().objectForKey(passwordKey) != nil
+  static let enableTouchIDKey = "com.nscodemonkey.passlockdemo.enableTouchID"
+  
+  static func isTouchIDEnabled() -> Bool {
+    return NSUserDefaults.standardUserDefaults().boolForKey(enableTouchIDKey)
+  }
+}
+
+struct PassLock {
+  static let keychain = Keychain(config: KeychainConfiguration())
+  
+  static var hasPassword: Bool {
+    return keychain.password() != nil
   }
 }
 
@@ -24,7 +33,8 @@ class TableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    enablePasswordSwitch.on = UserDefaults.hasPassword()
+    enablePasswordSwitch.on = PassLock.hasPassword
+    enableTouchIDSwitch.on = UserDefaults.isTouchIDEnabled()
   }
 
   override func didReceiveMemoryWarning() {
@@ -34,8 +44,7 @@ class TableViewController: UITableViewController {
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     switch (indexPath.section, indexPath.row) {
     case (0, 1):
-      let password = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaults.passwordKey) as? String
-      let config = PassLockConfiguration(passLockType: .ChangePassword, initialPassword: password)
+      let config = PassLockConfiguration(passLockType: .ChangePassword)
       let controller = PassLockViewController.instantiateViewController(configration: config)
       controller.delegate = self
       navigationController?.pushViewController(controller, animated: true)
@@ -54,8 +63,7 @@ extension TableViewController: PassLockProtocol {
     switch result {
     case .Success(let password):
       print("set pass lock success: \(password)")
-      NSUserDefaults.standardUserDefaults().setObject(password, forKey: UserDefaults.passwordKey)
-      enablePasswordSwitch.on = UserDefaults.hasPassword()
+      enablePasswordSwitch.on = PassLock.hasPassword
       navigationController?.popViewControllerAnimated(true)
     case .Failure:
       break
@@ -66,7 +74,6 @@ extension TableViewController: PassLockProtocol {
     switch result {
     case .Success(let password):
       print("change pass lock success: \(password)")
-      NSUserDefaults.standardUserDefaults().setObject(password, forKey: UserDefaults.passwordKey)
       navigationController?.popViewControllerAnimated(true)
     case .Failure:
       print("change pass lock failure")
@@ -81,8 +88,7 @@ extension TableViewController: PassLockProtocol {
     switch result {
     case .Success(_):
       print("remove pass lock success")
-      NSUserDefaults.standardUserDefaults().setObject(nil, forKey: UserDefaults.passwordKey)
-      enablePasswordSwitch.on = UserDefaults.hasPassword()
+      enablePasswordSwitch.on = PassLock.hasPassword
       navigationController?.popViewControllerAnimated(true)
     case .Failure:
       print("remove pass lock failure")
@@ -102,14 +108,14 @@ extension TableViewController {
   @IBAction func enablePasswordValueChanged(sender: AnyObject) {
     let type: PassLockType = (sender as! UISwitch).on ? .SetPassword : .RemovePassword
     (sender as! UISwitch).on = !(sender as! UISwitch).on
-    let password = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaults.passwordKey) as? String
-    let config = PassLockConfiguration(passLockType: type, initialPassword: password)
+    let config = PassLockConfiguration(passLockType: type)
     let controller = PassLockViewController.instantiateViewController(configration: config)
     controller.delegate = self
     navigationController?.pushViewController(controller, animated: true)
   }
   
   @IBAction func enableTouchIDValueChanged(sender: AnyObject) {
+    NSUserDefaults.standardUserDefaults().setBool((sender as! UISwitch).on, forKey: UserDefaults.enableTouchIDKey)
   }
   
 }
