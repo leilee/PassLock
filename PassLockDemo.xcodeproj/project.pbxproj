@@ -26,6 +26,7 @@
 		B7DEBF371D990EBB00E18E9C /* TouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DEBF361D990EBB00E18E9C /* TouchID.swift */; };
 		B7DEBF391D990EE200E18E9C /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7DEBF381D990EE200E18E9C /* LocalAuthentication.framework */; };
 		B7DEBF3D1D991EEC00E18E9C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DEBF3C1D991EEC00E18E9C /* Keychain.swift */; };
+		B7DEBF411D992BEA00E18E9C /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DEBF401D992BEA00E18E9C /* KeychainTests.swift */; };
 		B7E068E01D8FD4F50007A7D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E068DF1D8FD4F50007A7D7 /* AppDelegate.swift */; };
 		B7E068E51D8FD4F50007A7D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E068E31D8FD4F50007A7D7 /* Main.storyboard */; };
 		B7E068E71D8FD4F60007A7D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E068E61D8FD4F60007A7D7 /* Assets.xcassets */; };
@@ -106,6 +107,7 @@
 		B7DEBF361D990EBB00E18E9C /* TouchID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchID.swift; sourceTree = "<group>"; };
 		B7DEBF381D990EE200E18E9C /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B7DEBF3C1D991EEC00E18E9C /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		B7DEBF401D992BEA00E18E9C /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		B7E068DC1D8FD4F50007A7D7 /* PassLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E068DF1D8FD4F50007A7D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7E068E41D8FD4F50007A7D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		B7D5C90C1D8FD5E3003F8C9B /* PassLockTests */ = {
 			isa = PBXGroup;
 			children = (
+				B7DEBF401D992BEA00E18E9C /* KeychainTests.swift */,
 				B7D5C90D1D8FD5E3003F8C9B /* PassLockTests.swift */,
 				B7D5C90F1D8FD5E3003F8C9B /* Info.plist */,
 			);
@@ -502,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7D5C90E1D8FD5E3003F8C9B /* PassLockTests.swift in Sources */,
+				B7DEBF411D992BEA00E18E9C /* KeychainTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
