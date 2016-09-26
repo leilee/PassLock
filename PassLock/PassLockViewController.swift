@@ -49,7 +49,8 @@ public class PassLockViewController: UIViewController {
     }
   }()
 
-  public class func instantiateViewController(configration config: PassLockConfiguration = PassLockConfiguration()) -> PassLockViewController {
+  public class func instantiateViewController(
+    configration config: PassLockConfiguration = PassLockConfiguration()) -> PassLockViewController {
     let storyboard = UIStoryboard(name: "PassLock", bundle: NSBundle(forClass: PassLockViewController.self))
     let controller = storyboard.instantiateViewControllerWithIdentifier("PassLockViewController") as! PassLockViewController
     controller.config = config
@@ -66,9 +67,45 @@ public class PassLockViewController: UIViewController {
 
     titleLabel.text = config.passLockType.title
     descriptionLabel.hidden = true
+    
+    // dismiss on ApplicationBackground
+    NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification,
+                                                            object: nil,
+                                                            queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+                                                              self?.dismiss(animated: false, completion: nil)
+    }
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+    print("\(#function)")
   }
 
 }
+
+// MARK: - Presentable
+
+extension PassLockViewController {
+  
+  public func present(animated flag: Bool, completion: (() -> Void)?) {
+    guard !PassLockWindow.sharedInstance.keyWindow else {
+      return
+    }
+    
+    PassLockWindow.sharedInstance.makeKeyAndVisible()
+    PassLockWindow.sharedInstance.rootViewController?.presentViewController(self, animated: flag, completion: completion)
+  }
+  
+  public func dismiss(animated flag: Bool, completion: (() -> Void)?) {
+    self.dismissViewControllerAnimated(flag) { 
+      PassLockWindow.sharedInstance.hidden = true
+      completion?()
+    }
+  }
+  
+}
+
+// MARK: - PasswordInputProtocol
 
 extension PassLockViewController: PasswordInputProtocol {
 
