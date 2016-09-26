@@ -42,20 +42,21 @@ public struct PasswordViewConfiguration {
 
 public struct PassLockConfiguration {
   let passwordConfig: PasswordViewConfiguration
+  let keychainConfig: KeychainConfiguration
   let retryCount: Int
   let usingTouchID: Bool
   let passLockType: PassLockType
-  let initialPassword: Password?
 
   public init(passwordConfig: PasswordViewConfiguration = PasswordViewConfiguration(),
-       retryCount: Int = 5,
-       usingTouchID: Bool = false,
-       passLockType: PassLockType = .SetPassword,
-       initialPassword: Password? = nil) {
+              keychainConfig: KeychainConfiguration = KeychainConfiguration(),
+              retryCount: Int = 5,
+              usingTouchID: Bool = false,
+              passLockType: PassLockType = .SetPassword) {
     self.passwordConfig = passwordConfig
+    self.keychainConfig = keychainConfig
     self.retryCount = retryCount
     self.usingTouchID = usingTouchID
     self.passLockType = passLockType
-    self.initialPassword = initialPassword
   }
+  
 }

@@ -11,7 +11,7 @@ import XCTest
 
 class KeychainTests: XCTestCase {
   
-  let keychain = Keychain(account: "aaa", accessGroup: nil)
+  let keychain = Keychain(config: KeychainConfiguration())
   let password = "asldkfjlas9283140]]]])(*)"
   
   override func setUp() {

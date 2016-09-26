@@ -38,6 +38,7 @@ public class PassLockViewController: UIViewController {
 
   var config: PassLockConfiguration = PassLockConfiguration()
   var currentPassword: Password?
+  var keychain: Keychain?
   var retryCount = 0
 
   lazy var stateMachine: StateMachine<PassLockState, PassLockEvent, Password> = {
@@ -49,13 +50,14 @@ public class PassLockViewController: UIViewController {
     }
   }()
 
-  public class func instantiateViewController(
-    configration config: PassLockConfiguration = PassLockConfiguration()) -> PassLockViewController {
-    let storyboard = UIStoryboard(name: "PassLock", bundle: NSBundle(forClass: PassLockViewController.self))
-    let controller = storyboard.instantiateViewControllerWithIdentifier("PassLockViewController") as! PassLockViewController
-    controller.config = config
-    controller.currentPassword = config.initialPassword
-    return controller
+  public class func instantiateViewController(configration config: PassLockConfiguration = PassLockConfiguration())
+    -> PassLockViewController {
+      let storyboard = UIStoryboard(name: "PassLock", bundle: NSBundle(forClass: PassLockViewController.self))
+      let controller = storyboard.instantiateViewControllerWithIdentifier("PassLockViewController") as! PassLockViewController
+      controller.config = config
+      controller.keychain = Keychain(config: config.keychainConfig)
+      controller.currentPassword = controller.keychain?.password()
+      return controller
   }
 
   public override func viewDidLoad() {

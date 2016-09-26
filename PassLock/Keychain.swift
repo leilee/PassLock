@@ -9,28 +9,39 @@
 import Foundation
 import Security
 
-public struct Keychain {
-  
+public struct KeychainConfiguration {
   public let account: String
   public let service: String
   public let accessGroup: String?
   
+  public init(account: String = "password",
+       service: String = "com.nscodemonkey.passlock",
+       accessGroup: String? = nil) {
+    self.account = account
+    self.service = service
+    self.accessGroup = accessGroup
+  }
+  
+}
+
+public struct Keychain {
+  
+  public let config: KeychainConfiguration
+  
   private var keychainQuery: [String : AnyObject] {
     var query = [String : AnyObject]()
     query[kSecClass as String] = kSecClassGenericPassword
-    query[kSecAttrAccount as String] = account
-    query[kSecAttrService as String] = service
-    if let accessGroup = accessGroup {
+    query[kSecAttrAccount as String] = config.account
+    query[kSecAttrService as String] = config.service
+    if let accessGroup = config.accessGroup {
       query[kSecAttrAccessGroup as String] = accessGroup
     }
     
     return query
   }
   
-  init(account: String, service: String = "com.nscodemonkey.passlock", accessGroup: String? = nil) {
-    self.account = account
-    self.service = service
-    self.accessGroup = accessGroup
+  public init(config: KeychainConfiguration) {
+    self.config = config
   }
   
 }

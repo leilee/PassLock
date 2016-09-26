@@ -44,6 +44,7 @@ extension PassLockViewController {
           return
         }
         strongSelf.descriptionLabel.hidden = true
+        strongSelf.keychain?.setPassword(password)
         strongSelf.delegate?.passLockController(strongSelf, didSetPassLock: .Success(password))
       })
       case (.Confirm, .Invalid): return (.Confirm, { _, _, _ in
@@ -101,6 +102,7 @@ extension PassLockViewController {
           return
         }
         strongSelf.descriptionLabel.hidden = true
+        strongSelf.keychain?.setPassword(password)
         strongSelf.delegate?.passLockController(strongSelf, didChangePassLock: .Success(password))
       })
       case (.Reconfirm, .Invalid): return (.Reconfirm, { _, _, _ in
@@ -125,6 +127,7 @@ extension PassLockViewController {
           return
         }
         strongSelf.descriptionLabel.hidden = true
+        strongSelf.keychain?.deletePassword()
         strongSelf.delegate?.passLockController(strongSelf, didRemovePassLock: .Success(nil))
       })
       case (.Confirm, .Invalid):
