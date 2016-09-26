@@ -15,7 +15,7 @@ public struct TouchID {
     return LAContext().canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: nil)
   }
   
-  func presentTouchID(reason: String, fallbackTitle: String? = nil, callback: (Bool, NSError?) -> Void) {
+  public static func presentTouchID(reason: String, fallbackTitle: String? = nil, callback: (Bool, NSError?) -> Void) {
     let context = LAContext()
     context.localizedFallbackTitle = fallbackTitle
     context.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, error) in

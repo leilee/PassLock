@@ -43,15 +43,18 @@ public struct PasswordConfiguration {
 public struct PassLockConfiguration {
   let passwordConfig: PasswordConfiguration
   let retryCount: Int
+  let usingTouchID: Bool
   let passLockType: PassLockType
   let initialPassword: Password?
 
   public init(passwordConfig: PasswordConfiguration = PasswordConfiguration(),
        retryCount: Int = 5,
+       usingTouchID: Bool = false,
        passLockType: PassLockType = .SetPassword,
        initialPassword: Password? = nil) {
     self.passwordConfig = passwordConfig
     self.retryCount = retryCount
+    self.usingTouchID = usingTouchID
     self.passLockType = passLockType
     self.initialPassword = initialPassword
   }

@@ -61,12 +61,8 @@ public class PassLockViewController: UIViewController {
   public override func viewDidLoad() {
     super.viewDidLoad()
 
-    // setup UI
-    passwordInputView.delegate = self
-    passwordInputView.becomeFirstResponder()
-
-    titleLabel.text = config.passLockType.title
-    descriptionLabel.hidden = true
+    setup()
+    presentTouchIDIfNeeded()
     
     // dismiss on ApplicationBackground
     NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification,
@@ -114,4 +110,36 @@ extension PassLockViewController: PasswordInputProtocol {
     stateMachine.handleEvent(event, info: input)
   }
 
+}
+
+// MARK: - Touch ID
+
+extension PassLockViewController {
+  
+  private func presentTouchIDIfNeeded() {
+    guard config.usingTouchID && TouchID.enabled else {
+      return
+    }
+    
+    let displayName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as String] as! String
+    TouchID.presentTouchID("验证指纹解锁 \(displayName)") { success, error in
+      if success {
+        self.delegate?.passLockController(self, didUnlock: .Success(nil))
+      }
+    }
+  }
+  
+}
+
+// MARK: - Private
+
+extension PassLockViewController {
+  
+  private func setup() {
+    passwordInputView.delegate = self
+    passwordInputView.becomeFirstResponder()
+    
+    titleLabel.text = config.passLockType.title
+    descriptionLabel.hidden = true
+  }
 }
