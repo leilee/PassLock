@@ -122,16 +122,17 @@ extension PassLockViewController {
       return
     }
     
-    var reason: String
-    if let displayName = NSBundle.mainBundle().infoDictionary!["CFBundleDisplayName"] as? String {
-      reason = "验证指纹解锁\(displayName)"
-    } else if let bundleName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as? String {
-      reason = "验证指纹解锁\(bundleName)"
-    } else {
-      reason = "验证指纹解锁"
+    func reason() -> String {
+      if let displayName = NSBundle.mainBundle().infoDictionary!["CFBundleDisplayName"] as? String {
+        return "验证指纹解锁\(displayName)"
+      } else if let bundleName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as? String {
+        return "验证指纹解锁\(bundleName)"
+      } else {
+        return "验证指纹解锁"
+      }
     }
     
-    TouchID.presentTouchID(reason) { success, error in
+    TouchID.presentTouchID(reason()) { success, error in
       if success {
         self.delegate?.passLockController(self, didUnlock: .Success(nil))
       }

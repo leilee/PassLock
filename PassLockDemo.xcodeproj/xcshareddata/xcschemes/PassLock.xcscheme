@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B7D5C9051D8FD5E3003F8C9B"
+               BuildableName = "PassLockTests.xctest"
+               BlueprintName = "PassLockTests"
+               ReferencedContainer = "container:PassLockDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B7D5C8FC1D8FD5E2003F8C9B"
+            BuildableName = "PassLock.framework"
+            BlueprintName = "PassLock"
+            ReferencedContainer = "container:PassLockDemo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
