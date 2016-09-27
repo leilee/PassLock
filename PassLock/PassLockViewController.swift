@@ -76,7 +76,6 @@ public class PassLockViewController: UIViewController {
   
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
-    print("\(#function)")
   }
 
 }
