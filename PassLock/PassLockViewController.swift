@@ -74,6 +74,12 @@ public class PassLockViewController: UIViewController {
     }
   }
   
+  public override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    passwordInputView.becomeFirstResponder()
+  }
+  
   deinit {
     NSNotificationCenter.defaultCenter().removeObserver(self)
   }
@@ -147,7 +153,6 @@ extension PassLockViewController {
   
   private func setup() {
     passwordInputView.delegate = self
-    passwordInputView.becomeFirstResponder()
     
     titleLabel.text = config.passLockType.passwordInputTitle
     descriptionLabel.hidden = true

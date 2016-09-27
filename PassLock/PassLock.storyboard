@@ -53,7 +53,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="AKN-q3-MW7" firstAttribute="centerX" secondItem="sQT-2y-TpO" secondAttribute="centerX" id="0NJ-gd-7g7"/>
                                     <constraint firstItem="hsa-3j-bgA" firstAttribute="top" secondItem="Z1W-4l-u77" secondAttribute="bottom" id="5al-fv-5XF"/>
