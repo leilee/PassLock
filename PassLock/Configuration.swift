@@ -18,12 +18,23 @@ public enum PassLockType {
 }
 
 extension PassLockType {
-  public var title: String {
+  
+  var title: String? {
+    switch self {
+    case .SetPassword: return "设置密码"
+    case .RemovePassword: return "关闭密码"
+    case .ChangePassword: return "更改密码"
+    default: return nil
+    }
+  }
+  
+  var passwordInputTitle: String {
     switch self {
     case .SetPassword, .Unlock: return "请输入密码"
     case .ChangePassword, .RemovePassword: return "请输入旧密码"
     }
   }
+  
 }
 
 public struct PasswordViewConfiguration {

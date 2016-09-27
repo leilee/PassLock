@@ -149,7 +149,10 @@ extension PassLockViewController {
     passwordInputView.delegate = self
     passwordInputView.becomeFirstResponder()
     
-    titleLabel.text = config.passLockType.title
+    titleLabel.text = config.passLockType.passwordInputTitle
     descriptionLabel.hidden = true
+    
+    navigationItem.title = config.passLockType.title
   }
+  
 }
