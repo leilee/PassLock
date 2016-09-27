@@ -123,8 +123,16 @@ extension PassLockViewController {
       return
     }
     
-    let displayName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as String] as! String
-    TouchID.presentTouchID("验证指纹解锁 \(displayName)") { success, error in
+    var reason: String
+    if let displayName = NSBundle.mainBundle().infoDictionary!["CFBundleDisplayName"] as? String {
+      reason = "验证指纹解锁\(displayName)"
+    } else if let bundleName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as? String {
+      reason = "验证指纹解锁\(bundleName)"
+    } else {
+      reason = "验证指纹解锁"
+    }
+    
+    TouchID.presentTouchID(reason) { success, error in
       if success {
         self.delegate?.passLockController(self, didUnlock: .Success(nil))
       }
