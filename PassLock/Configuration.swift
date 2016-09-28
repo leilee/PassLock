@@ -30,8 +30,8 @@ extension PassLockType {
   
   var passwordInputTitle: String {
     switch self {
-    case .SetPassword, .Unlock: return "请输入密码"
-    case .ChangePassword, .RemovePassword: return "请输入旧密码"
+    case .SetPassword, .RemovePassword, .Unlock: return "请输入密码"
+    case .ChangePassword: return "请输入旧密码"
     }
   }
   

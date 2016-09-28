@@ -72,6 +72,12 @@ public class PassLockViewController: UIViewController {
                                                             queue: NSOperationQueue.mainQueue()) { [weak self] _ in
                                                               self?.dismiss(animated: false, completion: nil)
     }
+    
+    NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification,
+                                                            object: nil,
+                                                            queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+                                                              self?.passwordInputView.becomeFirstResponder()
+    }
   }
   
   public override func viewWillAppear(animated: Bool) {
