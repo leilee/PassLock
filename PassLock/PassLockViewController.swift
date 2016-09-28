@@ -164,6 +164,13 @@ extension PassLockViewController {
     descriptionLabel.hidden = true
     
     navigationItem.title = config.passLockType.title
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PassLockViewController.backgroundTapped))
+    view.addGestureRecognizer(tapGesture)
+  }
+  
+  @objc private func backgroundTapped() {
+    passwordInputView.becomeFirstResponder()
   }
   
 }
