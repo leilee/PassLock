@@ -9,29 +9,29 @@
 import UIKit
 
 public protocol PasswordInputProtocol: class {
-  func passwordInputView(passwordInputView: PasswordInputView, inputComplete input: Password)
+  func passwordInputView(_ passwordInputView: PasswordInputView, inputComplete input: Password)
 }
 
-public class PasswordInputView: UIView {
+open class PasswordInputView: UIView {
 
-  public weak var delegate: PasswordInputProtocol?
+  open weak var delegate: PasswordInputProtocol?
 
-  public var keyboardType: UIKeyboardType = .NumberPad
+  open var keyboardType: UIKeyboardType = .numberPad
 
-  @IBInspectable public var spacing: CGFloat = 6.0
-  @IBInspectable public var strokeHeight: Int = 2
-  @IBInspectable public var strokeColor: UIColor = UIColor.blackColor()
-  @IBInspectable public var digit: Int = 4
+  @IBInspectable open var spacing: CGFloat = 6.0
+  @IBInspectable open var strokeHeight: Int = 2
+  @IBInspectable open var strokeColor: UIColor = UIColor.black
+  @IBInspectable open var digit: Int = 4
 
-  private var store = String() {
+  fileprivate var store = String() {
     didSet {
       for i in 0..<store.length {
-        strokeViews[i].hidden = true
-        dotViews[i].hidden = false
+        strokeViews[i].isHidden = true
+        dotViews[i].isHidden = false
       }
       for j in store.length..<digit {
-        strokeViews[j].hidden = false
-        dotViews[j].hidden = true
+        strokeViews[j].isHidden = false
+        dotViews[j].isHidden = true
       }
       if store.length == digit {
         // 输入密码后, delay 0.1s 再回调 delegate
@@ -43,19 +43,19 @@ public class PasswordInputView: UIView {
     }
   }
 
-  private var strokeViews = [UIView]()
-  private var dotViews = [UIView]()
+  fileprivate var strokeViews = [UIView]()
+  fileprivate var dotViews = [UIView]()
 
-  public override func awakeFromNib() {
+  open override func awakeFromNib() {
     super.awakeFromNib()
     setup()
   }
 
-  public override func layoutSubviews() {
+  open override func layoutSubviews() {
     super.layoutSubviews()
 
     dotViews.forEach { (dot) in
-      let width = CGRectGetWidth(dot.frame)
+      let width = dot.frame.width
       dot.layer.cornerRadius = width / 2.0
       dot.clipsToBounds = true
     }
@@ -67,25 +67,25 @@ public class PasswordInputView: UIView {
 
 extension PasswordInputView: UIKeyInput {
 
-  public func insertText(text: String) {
+  public func insertText(_ text: String) {
     guard store.length + text.length <= digit else {
       return
     }
-    store.appendContentsOf(text)
+    store.append(text)
   }
 
   public func deleteBackward() {
-    guard hasText() else {
+    guard hasText else {
       return
     }
-    store.removeAtIndex(store.endIndex.predecessor())
+    store.remove(at: store.characters.index(before: store.endIndex))
   }
 
-  public func hasText() -> Bool {
+  public var hasText : Bool {
     return store.characters.count > 0
   }
 
-  override public func canBecomeFirstResponder() -> Bool {
+  override open var canBecomeFirstResponder : Bool {
     return true
   }
 
@@ -105,7 +105,7 @@ extension PasswordInputView {
 
 extension PasswordInputView {
 
-  private final func setup() {
+  fileprivate final func setup() {
     guard digit > 0 && strokeHeight > 0 else {
       return
     }
@@ -125,7 +125,7 @@ extension PasswordInputView {
       let dot = UIView()
       dot.translatesAutoresizingMaskIntoConstraints = false
       dot.backgroundColor = strokeColor
-      dot.hidden = true
+      dot.isHidden = true
       dotViews.append(dot)
       addSubview(dot)
     }
@@ -133,7 +133,7 @@ extension PasswordInputView {
     // layout stroke
     var strokeDict = [String : AnyObject]()
     var strokeFormatString = ""
-    strokeViews.enumerate().forEach { (index, stroke) in
+    strokeViews.enumerated().forEach { (index, stroke) in
       strokeDict["stroke\(index)"] = stroke
 
       if index == 0 {
@@ -146,21 +146,21 @@ extension PasswordInputView {
       }
 
       // vertical
-      addConstraint(NSLayoutConstraint(item: stroke, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
-      addConstraint(NSLayoutConstraint(item: stroke, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: CGFloat(strokeHeight)))
+      addConstraint(NSLayoutConstraint(item: stroke, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+      addConstraint(NSLayoutConstraint(item: stroke, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: CGFloat(strokeHeight)))
     }
 
     // horizontal
     let metrics = ["space": spacing]
-    addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(strokeFormatString, options: .DirectionLeftToRight, metrics: metrics, views: strokeDict))
+    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: strokeFormatString, options: .directionLeftToRight, metrics: metrics, views: strokeDict))
 
     // layout dot
-    dotViews.enumerate().forEach { (index, dot) in
+    dotViews.enumerated().forEach { (index, dot) in
       let stroke = strokeViews[index]
-      addConstraint(NSLayoutConstraint(item: dot, attribute: .CenterX, relatedBy: .Equal, toItem: stroke, attribute: .CenterX, multiplier: 1, constant: 0))
-      addConstraint(NSLayoutConstraint(item: dot, attribute: .CenterY, relatedBy: .Equal, toItem: stroke, attribute: .CenterY, multiplier: 1, constant: 0))
-      addConstraint(NSLayoutConstraint(item: dot, attribute: .Width, relatedBy: .Equal, toItem: stroke, attribute: .Width, multiplier: 1, constant: 0))
-      addConstraint(NSLayoutConstraint(item: dot, attribute: .Height, relatedBy: .Equal, toItem: dot, attribute: .Width, multiplier: 1, constant: 0))
+      addConstraint(NSLayoutConstraint(item: dot, attribute: .centerX, relatedBy: .equal, toItem: stroke, attribute: .centerX, multiplier: 1, constant: 0))
+      addConstraint(NSLayoutConstraint(item: dot, attribute: .centerY, relatedBy: .equal, toItem: stroke, attribute: .centerY, multiplier: 1, constant: 0))
+      addConstraint(NSLayoutConstraint(item: dot, attribute: .width, relatedBy: .equal, toItem: stroke, attribute: .width, multiplier: 1, constant: 0))
+      addConstraint(NSLayoutConstraint(item: dot, attribute: .height, relatedBy: .equal, toItem: dot, attribute: .width, multiplier: 1, constant: 0))
     }
   }
 

@@ -12,15 +12,15 @@ import LocalAuthentication
 public struct TouchID {
   
   public static var enabled: Bool {
-    return LAContext().canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: nil)
+    return LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
   }
   
-  public static func presentTouchID(reason: String, fallbackTitle: String? = nil, callback: (Bool, NSError?) -> Void) {
+  public static func presentTouchID(_ reason: String, fallbackTitle: String? = nil, callback: @escaping (Bool, NSError?) -> Void) {
     let context = LAContext()
     context.localizedFallbackTitle = fallbackTitle
-    context.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, error) in
-      dispatch_async(dispatch_get_main_queue(), { 
-        callback(success, error)
+    context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, error) in
+      DispatchQueue.main.async(execute: { 
+        callback(success, error as NSError?)
       })
     }
   }
