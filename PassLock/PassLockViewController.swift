@@ -96,7 +96,7 @@ open class PassLockViewController: UIViewController {
 
 extension PassLockViewController {
   
-  public func present(animated flag: Bool, completionHandler completion: (() -> Void)? = nil) {
+  public func present(animated flag: Bool, completionHandler completion: (() -> Void)?) {
     guard !PassLockWindow.sharedInstance.isKeyWindow else {
       return
     }
@@ -105,7 +105,7 @@ extension PassLockViewController {
     PassLockWindow.sharedInstance.rootViewController?.present(self, animated: flag, completion: completion)
   }
   
-  public func dismiss(animated flag: Bool, completionHandler completion: (() -> Void)? = nil) {
+  public func dismiss(animated flag: Bool, completionHandler completion: (() -> Void)?) {
     PassLockWindow.sharedInstance.rootViewController?.dismiss(animated: flag) {
       PassLockWindow.sharedInstance.isHidden = true
       completion?()

@@ -54,13 +54,19 @@ extension AppDelegate: PassLockProtocol {
                                          passLockType: .unlock)
       let controller = PassLockViewController.instantiateViewController(configration: config)
       controller.delegate = self
-      controller.present(animated: false)
+      controller.present(animated: true, completionHandler: nil)
     }
   }
   
   func passLockController(_ passLockController: PassLockViewController, didUnlock result: Result<Any?>) {
     print("\(#function) \(result)")
-    PassLockHelper.deletePassLock()
-    exit(0)
+    switch result {
+    case .success(_):
+      passLockController.dismiss(animated: true, completionHandler: nil)
+    case .failure:
+      PassLockHelper.deletePassLock()
+      exit(0)
+    }
+    
   }
 }
