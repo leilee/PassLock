@@ -54,7 +54,7 @@ extension AppDelegate: PassLockProtocol {
                                          passLockType: .unlock)
       let controller = PassLockViewController.instantiateViewController(configration: config)
       controller.delegate = self
-      controller.present(animated: false, completion: nil)
+      controller.present(animated: false)
     }
   }
   

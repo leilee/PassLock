@@ -50,7 +50,7 @@ open class PassLockViewController: UIViewController {
     }
   }()
 
-  open class func instantiateViewController(configration config: PassLockConfiguration = PassLockConfiguration())
+  open static func instantiateViewController(configration config: PassLockConfiguration = PassLockConfiguration())
     -> PassLockViewController {
       let storyboard = UIStoryboard(name: "PassLock", bundle: Bundle(for: PassLockViewController.self))
       let controller = storyboard.instantiateViewController(withIdentifier: "PassLockViewController") as! PassLockViewController
@@ -96,7 +96,7 @@ open class PassLockViewController: UIViewController {
 
 extension PassLockViewController {
   
-  public func present(animated flag: Bool, completion: (() -> Void)?) {
+  public func present(animated flag: Bool, completionHandler completion: (() -> Void)? = nil) {
     guard !PassLockWindow.sharedInstance.isKeyWindow else {
       return
     }
@@ -105,8 +105,8 @@ extension PassLockViewController {
     PassLockWindow.sharedInstance.rootViewController?.present(self, animated: flag, completion: completion)
   }
   
-  open override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
-    self.dismiss(animated: flag) { 
+  public func dismiss(animated flag: Bool, completionHandler completion: (() -> Void)? = nil) {
+    PassLockWindow.sharedInstance.rootViewController?.dismiss(animated: flag) {
       PassLockWindow.sharedInstance.isHidden = true
       completion?()
     }
