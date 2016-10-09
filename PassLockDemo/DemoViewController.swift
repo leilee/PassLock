@@ -118,7 +118,7 @@ extension DemoViewController: PassLockProtocol {
     case .success(let password):
       print("set pass lock success: \(password)")
       enablePasswordSwitch.isOn = PassLockHelper.hasPassLock
-      navigationController?.popViewController(animated: true)
+      _ = navigationController?.popViewController(animated: true)
       tableView.reloadData()
     case .failure:
       break
@@ -132,7 +132,7 @@ extension DemoViewController: PassLockProtocol {
     case .failure:
       print("change pass lock failure")
     }
-    navigationController?.popViewController(animated: true)
+    _ = navigationController?.popViewController(animated: true)
     tableView.reloadData()
   }
   
@@ -144,7 +144,7 @@ extension DemoViewController: PassLockProtocol {
     case .failure:
       print("remove pass lock failure")
     }
-    navigationController?.popViewController(animated: true)
+    _ = navigationController?.popViewController(animated: true)
     tableView.reloadData()
   }
   

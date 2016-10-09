@@ -75,7 +75,7 @@ extension Keychain {
     return password
   }
   
-  public func setPassword(_ password: String) -> Bool {
+  @discardableResult public func setPassword(_ password: String) -> Bool {
     let encodedPassword = password.data(using: String.Encoding.utf8)
     var status = SecItemCopyMatching(keychainQuery as CFDictionary, nil)
     var attributes = [String : AnyObject]()
@@ -94,7 +94,7 @@ extension Keychain {
     return status == noErr
   }
   
-  public func deletePassword() -> Bool {
+  @discardableResult public func deletePassword() -> Bool {
     let status = SecItemDelete(keychainQuery as CFDictionary)
     return status == noErr
   }
