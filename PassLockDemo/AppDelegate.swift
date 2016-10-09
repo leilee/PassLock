@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     lock()
@@ -43,22 +42,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationWillTerminate(application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
+}
 
-  func lock() {
-    if PassLock.hasPassword {
-      let config = PassLockConfiguration(usingTouchID: UserDefaults.isTouchIDEnabled(), passLockType: .Unlock)
+// MARK: - PassLock
+
+extension AppDelegate: PassLockProtocol {
+  private func lock() {
+    if PassLockHelper.hasPassLock {
+      let config = PassLockConfiguration(keychainConfig: PassLockHelper.keychain.config,
+                                         usingTouchID: PassLockHelper.enableTouchID,
+                                         passLockType: .Unlock)
       let controller = PassLockViewController.instantiateViewController(configration: config)
       controller.delegate = self
-      
       controller.present(animated: false, completion: nil)
     }
   }
-
-}
-
-extension AppDelegate: PassLockProtocol {
+  
   func passLockController(passLockController: PassLockViewController, didUnlock result: Result<Any?>) {
-    passLockController.dismiss(animated: true, completion: nil)
+    print("\(#function) \(result)")
+    PassLockHelper.deletePassLock()
+    exit(0)
   }
 }
-
