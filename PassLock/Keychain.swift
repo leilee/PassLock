@@ -28,13 +28,13 @@ public struct Keychain {
   
   public let config: KeychainConfiguration
   
-  private var keychainQuery: [String : AnyObject] {
+  fileprivate var keychainQuery: [String : AnyObject] {
     var query = [String : AnyObject]()
     query[kSecClass as String] = kSecClassGenericPassword
-    query[kSecAttrAccount as String] = config.account
-    query[kSecAttrService as String] = config.service
+    query[kSecAttrAccount as String] = config.account as AnyObject?
+    query[kSecAttrService as String] = config.service as AnyObject?
     if let accessGroup = config.accessGroup {
-      query[kSecAttrAccessGroup as String] = accessGroup
+      query[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
     }
     
     return query
@@ -57,7 +57,7 @@ extension Keychain {
     query[kSecReturnData as String] = kCFBooleanTrue
     
     var result: AnyObject?
-    let status = withUnsafeMutablePointer(&result) {
+    let status = withUnsafeMutablePointer(to: &result) {
       SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
     }
     
@@ -66,8 +66,8 @@ extension Keychain {
     }
     
     guard let queryResult = result as? [String : AnyObject],
-      let passwordData = queryResult[kSecValueData as String] as? NSData,
-      let password = String(data: passwordData, encoding: NSUTF8StringEncoding)
+      let passwordData = queryResult[kSecValueData as String] as? Data,
+      let password = String(data: passwordData, encoding: String.Encoding.utf8)
       else {
         return nil
     }
@@ -75,27 +75,27 @@ extension Keychain {
     return password
   }
   
-  public func setPassword(password: String) -> Bool {
-    let encodedPassword = password.dataUsingEncoding(NSUTF8StringEncoding)
-    var status = SecItemCopyMatching(keychainQuery, nil)
+  @discardableResult public func setPassword(_ password: String) -> Bool {
+    let encodedPassword = password.data(using: String.Encoding.utf8)
+    var status = SecItemCopyMatching(keychainQuery as CFDictionary, nil)
     var attributes = [String : AnyObject]()
     
     switch status {
     case noErr:
-      attributes[kSecValueData as String] = encodedPassword
-      status = SecItemUpdate(keychainQuery, attributes)
+      attributes[kSecValueData as String] = encodedPassword as AnyObject?
+      status = SecItemUpdate(keychainQuery as CFDictionary, attributes as CFDictionary)
     case errSecItemNotFound:
       var query = keychainQuery
-      query[kSecValueData as String] = encodedPassword
-      status = SecItemAdd(query, nil)
+      query[kSecValueData as String] = encodedPassword as AnyObject?
+      status = SecItemAdd(query as CFDictionary, nil)
     default: break
     }
     
     return status == noErr
   }
   
-  public func deletePassword() -> Bool {
-    let status = SecItemDelete(keychainQuery)
+  @discardableResult public func deletePassword() -> Bool {
+    let status = SecItemDelete(keychainQuery as CFDictionary)
     return status == noErr
   }
   

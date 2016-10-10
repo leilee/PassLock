@@ -21,7 +21,7 @@ class PassLockWindow: UIWindow {
   }
   
   convenience init() {
-    self.init(frame: UIScreen.mainScreen().bounds)
+    self.init(frame: UIScreen.main.bounds)
     self.rootViewController = UIViewController()
     self.windowLevel = UIWindowLevelAlert + 1
   }

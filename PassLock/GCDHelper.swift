@@ -8,11 +8,7 @@
 
 import Foundation
 
-func delay(delay: NSTimeInterval, queue: dispatch_queue_t = dispatch_get_main_queue(), closure:()->()) {
-  dispatch_after(
-    dispatch_time(
-      DISPATCH_TIME_NOW,
-      Int64(delay * Double(NSEC_PER_SEC))
-    ),
-    queue, closure)
+func delay(_ delay: TimeInterval, queue: DispatchQueue = DispatchQueue.main, closure:@escaping ()->()) {
+  queue.asyncAfter(
+    deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }

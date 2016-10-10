@@ -11,7 +11,7 @@ import PassLock
 
 struct PassLockHelper {
   
-  private static let touchIDKey = "com.shimo.enableTouchID"
+  fileprivate static let touchIDKey = "com.shimo.enableTouchID"
   
   static let keychain = Keychain(config: KeychainConfiguration())
   
@@ -21,16 +21,16 @@ struct PassLockHelper {
   
   static func deletePassLock() {
     keychain.deletePassword()
-    NSUserDefaults.standardUserDefaults().removeObjectForKey(touchIDKey)
+    UserDefaults.standard.removeObject(forKey: touchIDKey)
   }
   
   static var enableTouchID: Bool {
     set(value) {
-      NSUserDefaults.standardUserDefaults().setBool(value, forKey: touchIDKey)
-      NSUserDefaults.standardUserDefaults().synchronize()
+      UserDefaults.standard.set(value, forKey: touchIDKey)
+      UserDefaults.standard.synchronize()
     }
     get {
-      return NSUserDefaults.standardUserDefaults().boolForKey(touchIDKey)
+      return UserDefaults.standard.bool(forKey: touchIDKey)
     }
   }
 }
@@ -44,15 +44,15 @@ class DemoViewController: UITableViewController {
     super.viewDidLoad()
     
     title = "密码锁定"
-    enablePasswordSwitch.on = PassLockHelper.hasPassLock
-    enableTouchIDSwitch.on = PassLockHelper.enableTouchID
+    enablePasswordSwitch.isOn = PassLockHelper.hasPassLock
+    enableTouchIDSwitch.isOn = PassLockHelper.enableTouchID
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
   
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch section {
     case 0:
       return PassLockHelper.hasPassLock ? 2 : 1
@@ -63,18 +63,18 @@ class DemoViewController: UITableViewController {
     }
   }
   
-  override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-    switch (indexPath.section, indexPath.row) {
+  override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
     case (0, 1): return indexPath
     default: return nil
     }
   }
   
-  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.deselectRowAtIndexPath(indexPath, animated: false)
-    switch (indexPath.section, indexPath.row) {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: false)
+    switch ((indexPath as NSIndexPath).section, (indexPath as NSIndexPath).row) {
     case (0, 1):
-      let config = PassLockConfiguration(keychainConfig: PassLockHelper.keychain.config, passLockType: .ChangePassword)
+      let config = PassLockConfiguration(keychainConfig: PassLockHelper.keychain.config, passLockType: .changePassword)
       let controller = PassLockViewController.instantiateViewController(configration: config)
       controller.delegate = self
       navigationController?.pushViewController(controller, animated: true)
@@ -89,22 +89,22 @@ class DemoViewController: UITableViewController {
 
 extension DemoViewController {
   
-  @IBAction func enablePasswordValueChanged(sender: UISwitch) {
-    let flag = sender.on
+  @IBAction func enablePasswordValueChanged(_ sender: UISwitch) {
+    let flag = sender.isOn
     // UISwitch's function setOn(on: Bool, animated: Bool) send valueChange event in iOS 10
     // see also: http://stackoverflow.com/a/39725416/4661168
-    dispatch_async(dispatch_get_main_queue()) { 
-      sender.on = !flag
+    DispatchQueue.main.async { 
+      sender.isOn = !flag
     }
-    let type: PassLockType = flag ? .SetPassword : .RemovePassword
+    let type: PassLockType = flag ? .setPassword : .removePassword
     let config = PassLockConfiguration(keychainConfig: PassLockHelper.keychain.config, passLockType: type)
     let controller = PassLockViewController.instantiateViewController(configration: config)
     controller.delegate = self
     navigationController?.pushViewController(controller, animated: true)
   }
   
-  @IBAction func enableTouchIDValueChanged(sender: UISwitch) {
-    PassLockHelper.enableTouchID = sender.on
+  @IBAction func enableTouchIDValueChanged(_ sender: UISwitch) {
+    PassLockHelper.enableTouchID = sender.isOn
   }
   
 }
@@ -113,38 +113,38 @@ extension DemoViewController {
 
 extension DemoViewController: PassLockProtocol {
   
-  func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {
+  func passLockController(_ passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {
     switch result {
-    case .Success(let password):
+    case .success(let password):
       print("set pass lock success: \(password)")
-      enablePasswordSwitch.on = PassLockHelper.hasPassLock
-      navigationController?.popViewControllerAnimated(true)
+      enablePasswordSwitch.isOn = PassLockHelper.hasPassLock
+      _ = navigationController?.popViewController(animated: true)
       tableView.reloadData()
-    case .Failure:
+    case .failure:
       break
     }
   }
   
-  func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {
+  func passLockController(_ passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {
     switch result {
-    case .Success(let password):
+    case .success(let password):
       print("change pass lock success: \(password)")
-    case .Failure:
+    case .failure:
       print("change pass lock failure")
     }
-    navigationController?.popViewControllerAnimated(true)
+    _ = navigationController?.popViewController(animated: true)
     tableView.reloadData()
   }
   
-  func passLockController(passLockController: PassLockViewController, didRemovePassLock result: Result<Any?>) {
+  func passLockController(_ passLockController: PassLockViewController, didRemovePassLock result: Result<Any?>) {
     switch result {
-    case .Success(_):
+    case .success(_):
       print("remove pass lock success")
-      enablePasswordSwitch.on = PassLockHelper.hasPassLock
-    case .Failure:
+      enablePasswordSwitch.isOn = PassLockHelper.hasPassLock
+    case .failure:
       print("remove pass lock failure")
     }
-    navigationController?.popViewControllerAnimated(true)
+    _ = navigationController?.popViewController(animated: true)
     tableView.reloadData()
   }
   

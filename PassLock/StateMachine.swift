@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class StateMachine<State, Event, Info> {
+open class StateMachine<State, Event, Info> {
   public typealias TransitionCallback = (State, Event, Info?) -> Void
   public typealias TransitionLogic = (State, Event) -> (State, TransitionCallback?)?
 
-  public let initialState: State
-  public private(set) var state: State
-  public let transitionLogic: TransitionLogic?
+  open let initialState: State
+  open fileprivate(set) var state: State
+  open let transitionLogic: TransitionLogic?
 
   public init(initialState: State, transitionLogic: TransitionLogic?) {
     self.initialState = initialState
@@ -24,7 +24,7 @@ public class StateMachine<State, Event, Info> {
 }
 
 extension StateMachine {
-  public func handleEvent(event: Event, info: Info?) {
+  public func handleEvent(_ event: Event, info: Info?) {
     guard let (newState, callback) = transitionLogic?(state, event) else {
       return
     }

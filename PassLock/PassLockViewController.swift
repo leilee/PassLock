@@ -9,32 +9,32 @@
 import UIKit
 
 public enum Result<T> {
-  case Success(T)
-  case Failure
+  case success(T)
+  case failure
 }
 
 public protocol PassLockProtocol: class {
-  func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>)
-  func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>)
-  func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>)
-  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<Any?>)
+  func passLockController(_ passLockController: PassLockViewController, didSetPassLock result: Result<Password>)
+  func passLockController(_ passLockController: PassLockViewController, didChangePassLock result: Result<Password>)
+  func passLockController(_ passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>)
+  func passLockController(_ passLockController: PassLockViewController, didUnlock result : Result<Any?>)
 }
 
 // make protocol functions optional
 public extension PassLockProtocol {
-  func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {}
-  func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {}
-  func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>) {}
-  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<Any?>) {}
+  func passLockController(_ passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {}
+  func passLockController(_ passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {}
+  func passLockController(_ passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>) {}
+  func passLockController(_ passLockController: PassLockViewController, didUnlock result : Result<Any?>) {}
 }
 
-public class PassLockViewController: UIViewController {
+open class PassLockViewController: UIViewController {
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var passwordInputView: PasswordInputView!
 
-  public weak var delegate: PassLockProtocol?
+  open weak var delegate: PassLockProtocol?
 
   var config: PassLockConfiguration = PassLockConfiguration()
   var currentPassword: Password?
@@ -43,51 +43,51 @@ public class PassLockViewController: UIViewController {
 
   lazy var stateMachine: StateMachine<PassLockState, PassLockEvent, Password> = {
     switch self.config.passLockType {
-    case .SetPassword: return self.setPasswordStateMachine()
-    case .ChangePassword: return self.changePasswordStateMachine()
-    case .RemovePassword: return self.removePasswordStateMachine()
-    case .Unlock: return self.unlockStateMachine()
+    case .setPassword: return self.setPasswordStateMachine()
+    case .changePassword: return self.changePasswordStateMachine()
+    case .removePassword: return self.removePasswordStateMachine()
+    case .unlock: return self.unlockStateMachine()
     }
   }()
 
-  public class func instantiateViewController(configration config: PassLockConfiguration = PassLockConfiguration())
+  open static func instantiateViewController(configration config: PassLockConfiguration = PassLockConfiguration())
     -> PassLockViewController {
-      let storyboard = UIStoryboard(name: "PassLock", bundle: NSBundle(forClass: PassLockViewController.self))
-      let controller = storyboard.instantiateViewControllerWithIdentifier("PassLockViewController") as! PassLockViewController
+      let storyboard = UIStoryboard(name: "PassLock", bundle: Bundle(for: PassLockViewController.self))
+      let controller = storyboard.instantiateViewController(withIdentifier: "PassLockViewController") as! PassLockViewController
       controller.config = config
       controller.keychain = Keychain(config: config.keychainConfig)
       controller.currentPassword = controller.keychain?.password()
       return controller
   }
 
-  public override func viewDidLoad() {
+  open override func viewDidLoad() {
     super.viewDidLoad()
 
     setup()
     presentTouchIDIfNeeded()
     
     // dismiss on ApplicationBackground
-    NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidEnterBackgroundNotification,
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground,
                                                             object: nil,
-                                                            queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+                                                            queue: OperationQueue.main) { [weak self] _ in
                                                               self?.dismiss(animated: false, completion: nil)
     }
     
-    NSNotificationCenter.defaultCenter().addObserverForName(UIApplicationDidBecomeActiveNotification,
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive,
                                                             object: nil,
-                                                            queue: NSOperationQueue.mainQueue()) { [weak self] _ in
+                                                            queue: OperationQueue.main) { [weak self] _ in
                                                               self?.passwordInputView.becomeFirstResponder()
     }
   }
   
-  public override func viewWillAppear(animated: Bool) {
+  open override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     passwordInputView.becomeFirstResponder()
   }
   
   deinit {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
+    NotificationCenter.default.removeObserver(self)
   }
 
 }
@@ -96,18 +96,18 @@ public class PassLockViewController: UIViewController {
 
 extension PassLockViewController {
   
-  public func present(animated flag: Bool, completion: (() -> Void)?) {
-    guard !PassLockWindow.sharedInstance.keyWindow else {
+  public func present(animated flag: Bool, completionHandler completion: (() -> Void)?) {
+    guard !PassLockWindow.sharedInstance.isKeyWindow else {
       return
     }
     
     PassLockWindow.sharedInstance.makeKeyAndVisible()
-    PassLockWindow.sharedInstance.rootViewController?.presentViewController(self, animated: flag, completion: completion)
+    PassLockWindow.sharedInstance.rootViewController?.present(self, animated: flag, completion: completion)
   }
   
-  public func dismiss(animated flag: Bool, completion: (() -> Void)?) {
-    self.dismissViewControllerAnimated(flag) { 
-      PassLockWindow.sharedInstance.hidden = true
+  public func dismiss(animated flag: Bool, completionHandler completion: (() -> Void)?) {
+    PassLockWindow.sharedInstance.rootViewController?.dismiss(animated: flag) {
+      PassLockWindow.sharedInstance.isHidden = true
       completion?()
     }
   }
@@ -118,7 +118,7 @@ extension PassLockViewController {
 
 extension PassLockViewController: PasswordInputProtocol {
 
-  public func passwordInputView(passwordInputView: PasswordInputView, inputComplete input: Password) {
+  public func passwordInputView(_ passwordInputView: PasswordInputView, inputComplete input: Password) {
     let event = stateMachine.state.nextEvent(x: currentPassword, y: input)
     stateMachine.handleEvent(event, info: input)
   }
@@ -129,15 +129,15 @@ extension PassLockViewController: PasswordInputProtocol {
 
 extension PassLockViewController {
   
-  private func presentTouchIDIfNeeded() {
+  fileprivate func presentTouchIDIfNeeded() {
     guard config.usingTouchID && TouchID.enabled else {
       return
     }
     
     func reason() -> String {
-      if let displayName = NSBundle.mainBundle().infoDictionary!["CFBundleDisplayName"] as? String {
+      if let displayName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as? String {
         return "验证指纹解锁\(displayName)"
-      } else if let bundleName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as? String {
+      } else if let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
         return "验证指纹解锁\(bundleName)"
       } else {
         return "验证指纹解锁"
@@ -146,7 +146,7 @@ extension PassLockViewController {
     
     TouchID.presentTouchID(reason()) { success, error in
       if success {
-        self.delegate?.passLockController(self, didUnlock: .Success(nil))
+        self.delegate?.passLockController(self, didUnlock: .success(nil))
       }
     }
   }
@@ -157,11 +157,11 @@ extension PassLockViewController {
 
 extension PassLockViewController {
   
-  private func setup() {
+  fileprivate func setup() {
     passwordInputView.delegate = self
     
     titleLabel.text = config.passLockType.passwordInputTitle
-    descriptionLabel.hidden = true
+    descriptionLabel.isHidden = true
     
     navigationItem.title = config.passLockType.title
     
@@ -169,7 +169,7 @@ extension PassLockViewController {
     view.addGestureRecognizer(tapGesture)
   }
   
-  @objc private func backgroundTapped() {
+  @objc fileprivate func backgroundTapped() {
     passwordInputView.becomeFirstResponder()
   }
   
