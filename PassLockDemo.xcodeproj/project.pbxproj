@@ -10,7 +10,8 @@
 		B70B95031D90F2D10081811D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70B95021D90F2D10081811D /* Configuration.swift */; };
 		B711BE661D912A4B001ACEFC /* PassLockViewController+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711BE651D912A4B001ACEFC /* PassLockViewController+States.swift */; };
 		B711BE681D912E31001ACEFC /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711BE671D912E31001ACEFC /* StateMachine.swift */; };
-		B733F3CA1D92B1B6009C12F2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733F3C91D92B1B6009C12F2 /* TableViewController.swift */; };
+		B7205A361DAA5CED00392BAF /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7205A341DAA5CED00392BAF /* DemoViewController.swift */; };
+		B7205A371DAA5CED00392BAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7205A351DAA5CED00392BAF /* Main.storyboard */; };
 		B733F3CC1D93839B009C12F2 /* GCDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733F3CB1D93839B009C12F2 /* GCDHelper.swift */; };
 		B79865061D90D775003FD21A /* PassLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79865051D90D775003FD21A /* PassLockViewController.swift */; };
 		B79865081D90D96E003FD21A /* PassLock.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B79865071D90D96E003FD21A /* PassLock.storyboard */; };
@@ -28,7 +29,6 @@
 		B7DEBF3D1D991EEC00E18E9C /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DEBF3C1D991EEC00E18E9C /* Keychain.swift */; };
 		B7DEBF411D992BEA00E18E9C /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DEBF401D992BEA00E18E9C /* KeychainTests.swift */; };
 		B7E068E01D8FD4F50007A7D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E068DF1D8FD4F50007A7D7 /* AppDelegate.swift */; };
-		B7E068E51D8FD4F50007A7D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7E068E31D8FD4F50007A7D7 /* Main.storyboard */; };
 		B7E068E71D8FD4F60007A7D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7E068E61D8FD4F60007A7D7 /* Assets.xcassets */; };
 		B7E068F51D8FD4F60007A7D7 /* PassLockDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E068F41D8FD4F60007A7D7 /* PassLockDemoTests.swift */; };
 		B7E069001D8FD4F60007A7D7 /* PassLockDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E068FF1D8FD4F60007A7D7 /* PassLockDemoUITests.swift */; };
@@ -90,8 +90,10 @@
 		B70B95021D90F2D10081811D /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Configuration.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B711BE651D912A4B001ACEFC /* PassLockViewController+States.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PassLockViewController+States.swift"; sourceTree = "<group>"; };
 		B711BE671D912E31001ACEFC /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
-		B733F3C91D92B1B6009C12F2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		B7205A341DAA5CED00392BAF /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		B7205A351DAA5CED00392BAF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B733F3CB1D93839B009C12F2 /* GCDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDHelper.swift; sourceTree = "<group>"; };
+		B744FCA41DAAA2250017A5AD /* PassLockDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PassLockDemo.entitlements; sourceTree = "<group>"; };
 		B79865051D90D775003FD21A /* PassLockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassLockViewController.swift; sourceTree = "<group>"; };
 		B79865071D90D96E003FD21A /* PassLock.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PassLock.storyboard; sourceTree = "<group>"; };
 		B7D5C8F61D8FD548003F8C9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -110,7 +112,6 @@
 		B7DEBF401D992BEA00E18E9C /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		B7E068DC1D8FD4F50007A7D7 /* PassLockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassLockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E068DF1D8FD4F50007A7D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B7E068E41D8FD4F50007A7D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7E068E61D8FD4F60007A7D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7E068EB1D8FD4F60007A7D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7E068F01D8FD4F60007A7D7 /* PassLockDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassLockDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,9 +222,10 @@
 		B7E068DE1D8FD4F50007A7D7 /* PassLockDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B744FCA41DAAA2250017A5AD /* PassLockDemo.entitlements */,
 				B7E068DF1D8FD4F50007A7D7 /* AppDelegate.swift */,
-				B733F3C91D92B1B6009C12F2 /* TableViewController.swift */,
-				B7E068E31D8FD4F50007A7D7 /* Main.storyboard */,
+				B7205A341DAA5CED00392BAF /* DemoViewController.swift */,
+				B7205A351DAA5CED00392BAF /* Main.storyboard */,
 				B7D5C8F51D8FD548003F8C9B /* Launch Screen.storyboard */,
 				B7E068E61D8FD4F60007A7D7 /* Assets.xcassets */,
 				B7E068EB1D8FD4F60007A7D7 /* Info.plist */,
@@ -364,25 +366,36 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = NSCodeMonkey;
 				TargetAttributes = {
 					B7D5C8FC1D8FD5E2003F8C9B = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 					};
 					B7D5C9051D8FD5E3003F8C9B = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = B7E068DB1D8FD4F50007A7D7;
 					};
 					B7E068DB1D8FD4F50007A7D7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = LDA2PJNXAY;
+						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					B7E068EF1D8FD4F60007A7D7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = B7E068DB1D8FD4F50007A7D7;
 					};
 					B7E068FA1D8FD4F60007A7D7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = B7E068DB1D8FD4F50007A7D7;
 					};
 				};
@@ -431,7 +444,7 @@
 			files = (
 				B7D5C8F71D8FD548003F8C9B /* Launch Screen.storyboard in Resources */,
 				B7E068E71D8FD4F60007A7D7 /* Assets.xcassets in Resources */,
-				B7E068E51D8FD4F50007A7D7 /* Main.storyboard in Resources */,
+				B7205A371DAA5CED00392BAF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,8 +526,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7205A361DAA5CED00392BAF /* DemoViewController.swift in Sources */,
 				B7E068E01D8FD4F50007A7D7 /* AppDelegate.swift in Sources */,
-				B733F3CA1D92B1B6009C12F2 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,14 +586,6 @@
 			name = "Launch Screen.storyboard";
 			sourceTree = "<group>";
 		};
-		B7E068E31D8FD4F50007A7D7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B7E068E41D8FD4F50007A7D7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -588,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -601,6 +607,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -610,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -622,6 +630,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -634,6 +643,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PassLockDemo.app/PassLockDemo";
 			};
 			name = Debug;
@@ -645,6 +655,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PassLockDemo.app/PassLockDemo";
 			};
 			name = Release;
@@ -663,8 +674,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -709,8 +722,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -729,6 +744,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -737,24 +753,30 @@
 		B7E069051D8FD4F60007A7D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				CODE_SIGN_ENTITLEMENTS = PassLockDemo/PassLockDemo.entitlements;
+				DEVELOPMENT_TEAM = LDA2PJNXAY;
 				INFOPLIST_FILE = PassLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		B7E069061D8FD4F60007A7D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				CODE_SIGN_ENTITLEMENTS = PassLockDemo/PassLockDemo.entitlements;
+				DEVELOPMENT_TEAM = LDA2PJNXAY;
 				INFOPLIST_FILE = PassLockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -766,6 +788,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PassLockDemo.app/PassLockDemo";
 			};
 			name = Debug;
@@ -778,6 +801,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PassLockDemo.app/PassLockDemo";
 			};
 			name = Release;
@@ -789,6 +813,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PassLockDemo;
 			};
 			name = Debug;
@@ -800,6 +825,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NSCodeMonkey.PassLockDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = PassLockDemo;
 			};
 			name = Release;

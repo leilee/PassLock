@@ -11,27 +11,27 @@ import Foundation
 public typealias Password = String
 
 public enum PassLockType {
-  case SetPassword
-  case ChangePassword
-  case RemovePassword
-  case Unlock
+  case setPassword
+  case changePassword
+  case removePassword
+  case unlock
 }
 
 extension PassLockType {
   
   var title: String? {
     switch self {
-    case .SetPassword: return "设置密码"
-    case .RemovePassword: return "关闭密码"
-    case .ChangePassword: return "更改密码"
+    case .setPassword: return "设置密码"
+    case .removePassword: return "关闭密码"
+    case .changePassword: return "更改密码"
     default: return nil
     }
   }
   
   var passwordInputTitle: String {
     switch self {
-    case .SetPassword, .RemovePassword, .Unlock: return "请输入密码"
-    case .ChangePassword: return "请输入旧密码"
+    case .setPassword, .removePassword, .unlock: return "请输入密码"
+    case .changePassword: return "请输入旧密码"
     }
   }
   
@@ -43,7 +43,7 @@ public struct PasswordViewConfiguration {
   let strokeHeight: CGFloat
   let strokeColor: UIColor
 
-  init(digit: Int = 4, spacing: CGFloat = 20, strokeHeight: CGFloat = 2, strokeColor: UIColor = UIColor.blackColor()) {
+  init(digit: Int = 4, spacing: CGFloat = 20, strokeHeight: CGFloat = 2, strokeColor: UIColor = UIColor.black) {
     self.digit = digit
     self.spacing = spacing
     self.strokeHeight = strokeHeight
@@ -62,7 +62,7 @@ public struct PassLockConfiguration {
               keychainConfig: KeychainConfiguration = KeychainConfiguration(),
               retryCount: Int = 5,
               usingTouchID: Bool = false,
-              passLockType: PassLockType = .SetPassword) {
+              passLockType: PassLockType = .setPassword) {
     self.passwordConfig = passwordConfig
     self.keychainConfig = keychainConfig
     self.retryCount = retryCount
