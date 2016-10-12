@@ -32,7 +32,7 @@ public class PassLockViewController: UIViewController {
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
-  @IBOutlet weak var passwordInputView: PasswordInputView!
+  @IBOutlet weak public var passwordInputView: PasswordInputView!
 
   public weak var delegate: PassLockProtocol?
 
