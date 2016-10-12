@@ -10,6 +10,10 @@ import Foundation
 
 public typealias Password = String
 
+public enum UnlockBy {
+  case Password, TouchID
+}
+
 public enum PassLockType {
   case SetPassword
   case ChangePassword

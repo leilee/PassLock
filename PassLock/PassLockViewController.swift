@@ -17,7 +17,7 @@ public protocol PassLockProtocol: class {
   func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>)
   func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>)
   func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>)
-  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<Any?>)
+  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<UnlockBy>)
 }
 
 // make protocol functions optional
@@ -25,7 +25,7 @@ public extension PassLockProtocol {
   func passLockController(passLockController: PassLockViewController, didSetPassLock result: Result<Password>) {}
   func passLockController(passLockController: PassLockViewController, didChangePassLock result: Result<Password>) {}
   func passLockController(passLockController: PassLockViewController, didRemovePassLock result : Result<Any?>) {}
-  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<Any?>) {}
+  func passLockController(passLockController: PassLockViewController, didUnlock result : Result<UnlockBy>) {}
 }
 
 public class PassLockViewController: UIViewController {
@@ -146,7 +146,7 @@ extension PassLockViewController {
     
     TouchID.presentTouchID(reason()) { success, error in
       if success {
-        self.delegate?.passLockController(self, didUnlock: .Success(nil))
+        self.delegate?.passLockController(self, didUnlock: .Success(.TouchID))
       }
     }
   }

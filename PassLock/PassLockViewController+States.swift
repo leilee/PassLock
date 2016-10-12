@@ -165,7 +165,7 @@ extension PassLockViewController {
           return
         }
         strongSelf.descriptionLabel.hidden = true
-        strongSelf.delegate?.passLockController(strongSelf, didUnlock: .Success(nil))
+        strongSelf.delegate?.passLockController(strongSelf, didUnlock: .Success(.Password))
       })
       case (.Confirm, .Invalid):
         guard let strongSelf = self else {
