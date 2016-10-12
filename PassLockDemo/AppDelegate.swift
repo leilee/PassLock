@@ -62,6 +62,7 @@ extension AppDelegate: PassLockProtocol {
     print("\(#function) \(result)")
     switch result {
     case .Success(_):
+      passLockController.passwordInputView.resignFirstResponder()
       passLockController.dismiss(animated: true, completion: nil)
     default:
       PassLockHelper.deletePassLock()
