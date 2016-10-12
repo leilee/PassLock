@@ -58,11 +58,18 @@ extension AppDelegate: PassLockProtocol {
     }
   }
   
-  func passLockController(passLockController: PassLockViewController, didUnlock result: Result<Any?>) {
+  func passLockController(passLockController: PassLockViewController, didUnlock result: Result<UnlockBy>) {
     print("\(#function) \(result)")
     switch result {
-    case .Success(_):
-      passLockController.passwordInputView.resignFirstResponder()
+    case .Success(let unlockBy):
+      switch unlockBy {
+      case .Password:
+        passLockController.passwordInputView.resignFirstResponder()
+      case .TouchID:
+        dispatch_async(dispatch_get_main_queue()) {
+          passLockController.passwordInputView.resignFirstResponder()
+        }
+      }
       passLockController.dismiss(animated: true, completion: nil)
     default:
       PassLockHelper.deletePassLock()
